@@ -1,0 +1,1 @@
+C:\Users\Sarah Radzihovsky\Documents\dali-playground-master\Dali\Dali.csproj;arm
