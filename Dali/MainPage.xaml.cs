@@ -1,30 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using Windows.Web.Http.Headers;
 using System.Text;
 using System.Net.Http.Headers;
 using System.Net.Http;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
-using System;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using System.Threading;
+
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace Dali
-{
+{ 
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
@@ -34,6 +29,7 @@ namespace Dali
         {
             this.InitializeComponent();
             Message();
+            WebBrowsing();
             // GetRequest("http://127.0.0.1:8085/mark");
             //PostRequest("http://10.250.3.24:8085/mark/");//"http://127.0.0.1:8085/ping");
         }
@@ -41,24 +37,23 @@ namespace Dali
         public static void Message()
         {
             var dlg = new MessageDialog("Would you like to create a new mark or view a previously created mark?");
-            dlg.Commands.Add(new UICommand("Old", null, "OLD"));
-            dlg.Commands.Add(new UICommand("New", null, "NEW"));
-            var op = dlg.ShowAsync();
-            if ((op.Id).ToString() == "OLD")
+            dlg.Commands.Add(new UICommand("Old", delegate (IUICommand command)
             {
-                //change this to give a popup of all the existing marks so user can select one and configure that mark in the current Dali app instance
-                pickOldMark();
-                System.Diagnostics.Debug.WriteLine("MessageDialog Success");
-            }
+                //if "old" is picked, prompt the user with another message dialog with old mark options
+                var dlgOld = new MessageDialog("Which mark would you like to view here?");
+                var result = dlgOld.ShowAsync();
+
+            }));
+
+            dlg.Commands.Add(new UICommand("New", null));
+
+            var op = dlg.ShowAsync();
         }
 
-        private static void pickOldMark()
+        private static void WebBrowsing()
         {
-            var dlg = new MessageDialog("Which mark would you like to view here?");
-            // for loop through marks and add commands for each one so that user can select one
-            //dlg.Commands.Add(new UICommand("Old", null, "OLD"));
-            //dlg.Commands.Add(new UICommand("New", null, "NEW"));
-            //var op = dlg.ShowAsync();
+            WebBrowser wb = new WebBrowser()
+
         }
         async static void GetRequest(string url)
         {
@@ -79,7 +74,6 @@ namespace Dali
                 }
             }
         }
-
 
         async static void PostRequest(string url, string newLabel)
         {
