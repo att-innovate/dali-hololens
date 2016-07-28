@@ -1,1 +1,1 @@
-C:\Users\Sarah Radzihovsky\Documents\dali-playground-master\Dali\Dali.csproj;x86
+C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\Dali.csproj;x86

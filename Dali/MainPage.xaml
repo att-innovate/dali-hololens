@@ -8,8 +8,8 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ButtonDisabledBackgroundThemeBrush}">
-        <TextBox x:Name="textBox" HorizontalAlignment="Center" Margin="151,204,158,532" TextWrapping="Wrap" Text="" VerticalAlignment="Center" RenderTransformOrigin="0.158,0.676" PlaceholderText="Label this Spot" TextChanged="textBox_TextChanged" Background="#FFFF2F2F" FontWeight="Bold" Width="123"/>
-        <Button x:Name="button" Content="Done" HorizontalAlignment="Right" Margin="0,263,189,0" VerticalAlignment="Top" Click="button_Click"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Center" Margin="151,204,135,532" TextWrapping="Wrap" Text="" VerticalAlignment="Center" RenderTransformOrigin="0.158,0.676" PlaceholderText="Label this Spot" TextChanged="textBox_TextChanged" Background="#FFFF2F2F" FontWeight="Bold" Width="146"/>
+        <Button x:Name="button" Content="Done" HorizontalAlignment="Center" Margin="320,204,56,532" VerticalAlignment="Center" Click="button_Click"/>
 
     </Grid>
 </Page>

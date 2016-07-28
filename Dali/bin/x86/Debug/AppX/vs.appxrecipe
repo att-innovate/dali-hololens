@@ -10,7 +10,7 @@
     <PackageArchitecture>x86</PackageArchitecture>
     <PackageIdentityName>5a277adc-d8a7-4b9b-a749-268c1e0bda97</PackageIdentityName>
     <PackageIdentityPublisher>CN=Sarah Radzihovsky</PackageIdentityPublisher>
-    <IntermediateOutputPath>C:\Users\Sarah Radzihovsky\Documents\dali-playground-master\Dali\obj\x86\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\obj\x86\Debug\</IntermediateOutputPath>
     <RemoteDeploymentType>
     </RemoteDeploymentType>
     <PackageRegistrationPath>
@@ -25,16 +25,16 @@
     <JitOptimizationSuppressed>True</JitOptimizationSuppressed>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="C:\Users\Sarah Radzihovsky\Documents\dali-playground-master\Dali\bin\x86\Debug\Core\AppxManifest.xml">
+    <AppXManifest Include="C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-07-22T21:20:50.391</Modified>
+      <Modified>2016-07-28T18:48:41.170</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\Documents\dali-playground-master\Dali\bin\x86\Debug\Dali.exe">
+    <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\bin\x86\Debug\Dali.exe">
       <PackagePath>entrypoint\Dali.exe</PackagePath>
-      <Modified>2016-07-22T21:20:50.150</Modified>
+      <Modified>2016-07-28T18:48:40.384</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\.nuget\packages\Microsoft.CSharp\4.0.0\lib\netcore50\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -448,45 +448,45 @@
       <PackagePath>System.Xml.XmlSerializer.dll</PackagePath>
       <Modified>2015-07-23T06:11:12.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\Documents\dali-playground-master\Dali\Properties\Default.rd.xml">
+    <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
       <Modified>2016-07-07T18:25:38.485</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\Documents\dali-playground-master\Dali\Assets\LockScreenLogo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
       <Modified>2015-09-21T00:20:42.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\Documents\dali-playground-master\Dali\Assets\SplashScreen.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2015-09-21T00:20:42.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\Documents\dali-playground-master\Dali\Assets\Square150x150Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\Assets\Square150x150Logo.scale-200.png">
       <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2015-09-21T00:20:42.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\Documents\dali-playground-master\Dali\Assets\Square44x44Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\Assets\Square44x44Logo.scale-200.png">
       <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2015-09-21T00:20:42.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\Documents\dali-playground-master\Dali\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+    <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2015-09-21T00:20:42.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\Documents\dali-playground-master\Dali\Assets\StoreLogo.png">
+    <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\Assets\StoreLogo.png">
       <PackagePath>Assets\StoreLogo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2015-09-21T00:20:42.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\Documents\dali-playground-master\Dali\Assets\Wide310x150Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2015-09-21T00:20:42.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\Documents\dali-playground-master\Dali\bin\x86\Debug\Dali.xr.xml">
+    <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\bin\x86\Debug\Dali.xr.xml">
       <PackagePath>Dali.xr.xml</PackagePath>
       <Modified>2016-07-22T20:51:41.436</Modified>
     </AppxPackagedFile>
@@ -494,13 +494,13 @@
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
       <Modified>2016-07-07T18:17:22.550</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\Documents\dali-playground-master\Dali\bin\x86\Debug\resources.pri">
+    <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2016-07-22T20:51:42.027</Modified>
+      <Modified>2016-07-28T18:48:40.982</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\Documents\dali-playground-master\Dali\bin\x86\Debug\Core\Dali.exe">
+    <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\bin\x86\Debug\Core\Dali.exe">
       <PackagePath>Dali.exe</PackagePath>
-      <Modified>2016-07-22T21:20:50.388</Modified>
+      <Modified>2016-07-28T18:48:41.167</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
