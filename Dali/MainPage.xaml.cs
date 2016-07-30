@@ -19,7 +19,7 @@ using Windows.UI.Xaml.Navigation;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace Dali
-{ 
+{
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
@@ -29,8 +29,8 @@ namespace Dali
         {
             this.InitializeComponent();
             Message();
-            WebBrowsing();
-            // GetRequest("http://127.0.0.1:8085/mark");
+            // WebBrowsing();
+            GetRequest("http://10.250.3.24:8085");
             //PostRequest("http://10.250.3.24:8085/mark/");//"http://127.0.0.1:8085/ping");
         }
 
@@ -50,36 +50,51 @@ namespace Dali
             var op = dlg.ShowAsync();
         }
 
-        private static void WebBrowsing()
-        {
-            WebBrowser wb = new WebBrowser()
+        // private static void WebBrowsing()
+        // {
+        //  WebBrowser wb = new WebBrowser()
 
-        }
+        //}
         async static void GetRequest(string url)
         {
-            using (HttpClient client = new HttpClient())
+            try
             {
-                //get response
-                using (HttpResponseMessage response = await client.GetAsync(url))
+                using (HttpClient client = new HttpClient())
                 {
+                    client.BaseAddress = new Uri(url);
+                    client.DefaultRequestHeaders
+                                .Accept
+                                .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    //get response
+                    HttpResponseMessage response = await client.GetAsync("/mark");
+                    response.EnsureSuccessStatusCode();    // Throw if not a success code.
+
+
                     using (HttpContent content = response.Content)
                     {
-                        //string mycontent = await content.ReadAsStringAsync();
+                        string mycontent = await content.ReadAsStringAsync();
                         //HttpContentHeaders headers = content.Headers;
                         // Debug.WriteLine(headers);
-                        var responseString = client.GetStringAsync(url);
+                        var responseString = await client.GetAsync(url);
+                        System.Diagnostics.Debug.WriteLine("GET SUCCESS");
                         System.Diagnostics.Debug.Write(responseString);
-
                     }
                 }
             }
+            catch (Exception exception)
+            {
+                System.Diagnostics.Debug.WriteLine("CAUGHT EXCEPTION:");
+                System.Diagnostics.Debug.WriteLine(exception);
+            }
         }
+
+
+
 
         async static void PostRequest(string url, string newLabel)
         {
             try
             {
-
                 using (HttpClient client = new HttpClient())
                 {
                     client.BaseAddress = new Uri(url);
@@ -129,12 +144,11 @@ namespace Dali
 
         private void textBlock_SelectionChanged(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            PostRequest("http://10.250.3.24:8085", textBox.Text);
+            // PostRequest("http://10.250.3.24:8085", textBox.Text);
         }
     }
 }
