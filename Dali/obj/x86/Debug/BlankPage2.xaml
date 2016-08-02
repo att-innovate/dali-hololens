@@ -1,0 +1,16 @@
+﻿<Page
+    x:Class="Dali.BlankPage2"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Dali"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <TextBlock x:ConnectionId='1' x:Name="noteText" HorizontalAlignment="Center" Margin="44,135,51,108" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Height="525" Width="337"                                               />
+        <TextBlock x:ConnectionId='2' x:Name="labelText" HorizontalAlignment="Center" Margin="32,26,33,682" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Foreground="#FF05021C" Height="60" Width="367"                                               />
+
+    </Grid>
+</Page>
+

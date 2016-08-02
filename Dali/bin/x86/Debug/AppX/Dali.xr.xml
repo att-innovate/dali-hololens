@@ -10,6 +10,7 @@
     <RootType FullName="Windows.UI.Xaml.Controls.Grid">
       <RootProperty Name="Margin" />
       <RootProperty Name="Children" />
+      <RootProperty Name="Background" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
       <RootProperty Name="HorizontalAlignment" />
@@ -45,7 +46,14 @@
       <RootProperty Name="Foreground" />
       <RootProperty Name="SelectionHighlightColor" />
       <RootProperty Name="FontFamily" />
+      <RootProperty Name="FontSize" />
+      <RootEvent Name="SelectionChanged" />
+      <RootEvent Name="Loaded" />
     </RootType>
+    <RootType FullName="Dali.BlankPage1" />
+    <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.ThemeResourceExtension" />
+    <RootType FullName="Dali.BlankPage2" />
+    <RootType FullName="Dali.BlankPage3" />
     <RootType FullName="Dali.MainPage" />
   </Roots.RootTypes>
 </Roots>

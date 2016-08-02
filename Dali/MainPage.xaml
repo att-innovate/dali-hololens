@@ -8,9 +8,9 @@
     mc:Ignorable="d">
 
     <Grid Margin="0,-3,0,3">
-        <TextBox x:Name="textBox" HorizontalAlignment="Center" Margin="37,66,139,670" TextWrapping="Wrap" Text="" VerticalAlignment="Center" RenderTransformOrigin="0.158,0.676" PlaceholderText="Label this Spot" TextChanged="textBox_TextChanged" Background="#FFFF2F2F" FontWeight="Bold" Width="256" Foreground="#FFF10303"/>
-        <Button x:Name="button" Content="Done" HorizontalAlignment="Center" Margin="320,66,56,670" VerticalAlignment="Center" Click="button_Click"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="39,121,55,247" TextWrapping="Wrap" Text="" VerticalAlignment="Center" RenderTransformOrigin="-0.829,-1.283" Height="400" Width="338" RequestedTheme="Light" Foreground="#FF000005" SelectionHighlightColor="Black" FontFamily="Segoe WP"/>
+        <Button x:Name="oldButton" Content="Old" HorizontalAlignment="Center" Margin="174,141,202,595" VerticalAlignment="Center" Click="oldButton_Click"/>
+        <Button x:Name="newButton" Content="New" HorizontalAlignment="Center" Margin="180,241,202,495" VerticalAlignment="Center" Click="newButton_Click"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="42,46,52,670" TextWrapping="Wrap" Text="Would you like to create a new mark or view a previously created mark?" VerticalAlignment="Center" RenderTransformOrigin="-0.829,-1.283" Height="52" Width="338" RequestedTheme="Light" Foreground="#FF000005" SelectionHighlightColor="Black" FontFamily="Segoe WP"/>
 
     </Grid>
 </Page>

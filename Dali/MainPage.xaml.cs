@@ -24,6 +24,7 @@ namespace Dali
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     /// 
+
     public static class Globals
     {
         public static String label = ""; // Modifiable in Code
@@ -52,21 +53,20 @@ namespace Dali
                 MessageDialog dlgOld = new MessageDialog("Which mark would you like to view here?");
                 dlgOld.Commands.Add(new UICommand(labels[0], delegate (IUICommand command2)
                 {
-                    System.Diagnostics.Debug.WriteLine("added");
                     Globals.label = labels[0];
                     //get corresponding note
                     var note = getNote(labels[0], responseString);
-                     Globals.note = note;
+                    Globals.note = note;
+                    System.Diagnostics.Debug.WriteLine("Press the Done Button.");
 
                     //configure view
-                   // TextBlock textBlock = new TextBlock();
+                    // TextBlock textBlock = new TextBlock();
                     //textBlock.Text = getNote(labels[0], responseString);
                     //TextBox textBox = new TextBox();
                     //textBox.Text = labels[0];
                     //Controls.Add
                 }));
                
-
               /*   for (int i = 0; i < labels.Length; i++)
                 {
                     dlgOld.Commands.Add(new UICommand("Hello", null));
@@ -160,7 +160,7 @@ namespace Dali
 
                     string[] labels = getLabels(responseString);
 
-                    Message(labels, responseString);
+                   // Message(labels, responseString);
                 }
             }
             catch (Exception exception)
@@ -210,7 +210,7 @@ namespace Dali
           }
           */
 
-        async static void PostRequest(string url, string newLabel)
+       /* async static void PostRequest(string url, string newLabel)
         {
             try
             {
@@ -239,13 +239,12 @@ namespace Dali
                 System.Diagnostics.Debug.WriteLine("CAUGHT EXCEPTION:");
                 System.Diagnostics.Debug.WriteLine(exception);
             }
-        }
+        }*/
 
         private void textBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             /*FILL*/
             // GetRequest("http://127.0.0.1:8085/mark");
-
         }
 
         private void textBlock_SelectionChanged(object sender, RoutedEventArgs e)
@@ -254,14 +253,27 @@ namespace Dali
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
+           
+/*
             if (textBox.Text != "")
             {
-                // PostRequest("http://10.250.3.24:8085", textBox.Text);
+                 PostRequest("http://10.250.3.24:8085", textBox.Text);
             } else
             {
                 textBlock.Text = Globals.note;
                 textBox.Text = Globals.label;
-            }
+            }*/
+        }
+
+        private void newButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(BlankPage1));
+
+        }
+
+        private void oldButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(BlankPage2));
         }
     }
 }
