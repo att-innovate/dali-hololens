@@ -10,7 +10,7 @@
     <Grid Margin="0,-3,0,3">
         <TextBox x:ConnectionId='1' x:Name="textBox" HorizontalAlignment="Center" Margin="37,66,139,670" TextWrapping="Wrap" Text="" VerticalAlignment="Center" RenderTransformOrigin="0.158,0.676" PlaceholderText="Label this Spot"                                   Background="#FFFF2F2F" FontWeight="Bold" Width="256" Foreground="#FFF10303"/>
         <Button x:ConnectionId='2' x:Name="button" Content="Done" HorizontalAlignment="Center" Margin="320,66,56,670" VerticalAlignment="Center"                     />
-        <TextBlock x:ConnectionId='3' x:Name="textBlock" HorizontalAlignment="Left" Margin="38,143,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" RenderTransformOrigin="-0.829,-1.283" Height="400" Width="338" RequestedTheme="Light" Foreground="#FF000005" SelectionHighlightColor="Black" FontFamily="Segoe WP"/>
+        <TextBlock x:ConnectionId='3' x:Name="textBlock" HorizontalAlignment="Center" Margin="39,121,55,247" TextWrapping="Wrap" Text="" VerticalAlignment="Center" RenderTransformOrigin="-0.829,-1.283" Height="400" Width="338" RequestedTheme="Light" Foreground="#FF000005" SelectionHighlightColor="Black" FontFamily="Segoe WP"/>
 
     </Grid>
 </Page>
