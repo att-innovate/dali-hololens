@@ -28,20 +28,28 @@ namespace Dali
         public MainPage()
         {
             this.InitializeComponent();
-            Message();
             // WebBrowsing();
-            GetRequest("http://10.250.3.24:8085");
-            //PostRequest("http://10.250.3.24:8085/mark/");//"http://127.0.0.1:8085/ping");
+            GetRequest("http://10.250.3.24:8085/mark");
         }
 
-        public static void Message()
+        public static void Message(string[] labels)
         {
             var dlg = new MessageDialog("Would you like to create a new mark or view a previously created mark?");
             dlg.Commands.Add(new UICommand("Old", delegate (IUICommand command)
             {
-                //if "old" is picked, prompt the user with another message dialog with old mark options
-                var dlgOld = new MessageDialog("Which mark would you like to view here?");
-                var result = dlgOld.ShowAsync();
+            //if "old" is picked, prompt the user with another message dialog with old mark options
+            var dlgOld = new MessageDialog("Which mark would you like to view here?");
+                //create a button for each old mark
+                for (int i = 0; i < labels.Length; i++)
+                {
+                    System.Diagnostics.Debug.WriteLine(labels[i]);
+                    dlgOld.Commands.Add(new UICommand(labels[i], null));
+                    /* {
+                             //do something for the old mark selected
+                         }
+                     }*/
+                }
+            var result = dlgOld.ShowAsync();
 
             }));
 
@@ -54,7 +62,6 @@ namespace Dali
         // {
         //  WebBrowser wb = new WebBrowser()
 
-        //}
         async static void GetRequest(string url)
         {
             try
@@ -64,21 +71,22 @@ namespace Dali
                     client.BaseAddress = new Uri(url);
                     client.DefaultRequestHeaders
                                 .Accept
-                                .Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    //get response
-                    HttpResponseMessage response = await client.GetAsync("/mark");
-                    response.EnsureSuccessStatusCode();    // Throw if not a success code.
+                                .Add(new MediaTypeWithQualityHeaderValue("application/json"));//ACCEPT header
+                    HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "relativeAddress");
 
+                    var response = client.GetAsync("/mark").Result;
+                    //var responseStream = response.Content.ReadAsStreamAsync().Result;
+                    //var result = streamToString(responseStream);
+                   // System.Diagnostics.Debug.WriteLine(result);
 
-                    using (HttpContent content = response.Content)
-                    {
-                        string mycontent = await content.ReadAsStringAsync();
-                        //HttpContentHeaders headers = content.Headers;
-                        // Debug.WriteLine(headers);
-                        var responseString = await client.GetAsync(url);
-                        System.Diagnostics.Debug.WriteLine("GET SUCCESS");
-                        System.Diagnostics.Debug.Write(responseString);
-                    }
+                    var responseString = response.Content.ReadAsStringAsync().Result;
+                    System.Diagnostics.Debug.WriteLine(responseString);
+                    System.Diagnostics.Debug.WriteLine("GET SUCCESS:");
+
+                    string[] labels = getLabels(responseString);
+
+                    Message(labels);
+
                 }
             }
             catch (Exception exception)
@@ -88,7 +96,40 @@ namespace Dali
             }
         }
 
+        private static string[] getLabels(String responseString)
+        {
+            string[] stringSeparators = new string[] { "\"Label\":", ",\"Note\":" };
+            List<string> labels = new List<string>();
+            string[] labelsArray, segments;
+            segments = responseString.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries);
 
+            for (int i = 1; i < segments.Length; i = i + 2)
+            {
+                //check if this label has already been added to labels array 
+                if (labels.Contains(segments[i]) == false) {
+                    labels.Add(segments[i]);
+                    System.Diagnostics.Debug.WriteLine(segments[i]);
+
+                }
+            }
+            labelsArray = labels.ToArray();
+            return labelsArray;
+        }
+
+        private static Array streamToString(Stream responseStream)
+        {
+            var list = new List<string>();
+            using (var sr = new StreamReader(responseStream))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    list.Add(line);
+                }
+            }
+            string[] result = list.ToArray();
+            return result;
+        }
 
 
         async static void PostRequest(string url, string newLabel)
@@ -112,7 +153,7 @@ namespace Dali
                     var response = client.PostAsync("/mark", request.Content).Result;
                     var responseString = response.Content.ReadAsStringAsync().Result;
                     System.Diagnostics.Debug.Write(responseString);
-                    System.Diagnostics.Debug.WriteLine("SUCCESS:");
+                    System.Diagnostics.Debug.WriteLine("POST SUCCESS:");
                 }
             }
             catch (Exception exception)
@@ -121,19 +162,6 @@ namespace Dali
                 System.Diagnostics.Debug.WriteLine(exception);
             }
         }
-
-
-        /*    private void alert()
-            {
-                try
-                {
-                    // do stuff
-                }
-                catch (Exception ex)
-                {
-                    this.ShowAlert("Alert");
-                }
-            }*/
 
         private void textBox_TextChanged(object sender, TextChangedEventArgs e)
         {
