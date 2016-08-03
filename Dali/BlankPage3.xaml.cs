@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
+using Windows.Web.Http.Headers;
+using System.Text;
+using System.Net.Http.Headers;
+using System.Net.Http;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
@@ -20,41 +25,90 @@ namespace Dali
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
+    /// 
+
+    public static class Globals
+    {
+        public static String responseString = "";
+    }
+
+    public class Mark
+    {
+        public string label { get; set; }
+        public string note { get; set; }
+    }
+
     public sealed partial class BlankPage3 : Page
     {
         public BlankPage3()
         {
             this.InitializeComponent();
-            AddControls();
+            GetRequest("http://10.250.3.24:8085/mark");
+            listView.ItemsSource = getLabels(Globals.responseString);
         }
 
-
-
-        private void AddControls()
+        async static void GetRequest(string url)
         {
-            StackPanel stkpanel = new StackPanel();
-            stkpanel.Orientation = Orientation.Horizontal;
-            int loc = 20;
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(url);
+                    client.DefaultRequestHeaders
+                                .Accept
+                                .Add(new MediaTypeWithQualityHeaderValue("application/json"));//ACCEPT header
+                    HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "relativeAddress");
 
-            Button dynamicbutton = new Button();
+                    var response = client.GetAsync("/mark").Result;
 
-            dynamicbutton.Name = "testButton";
-            dynamicbutton.Height = 20;
-            dynamicbutton.Width = 50;
-            dynamicbutton.Tag = 1;
-            dynamicbutton.Margin = new Thickness(5 + loc, 5, 5, 5);
-            dynamicbutton.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
-            dynamicbutton.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
-            dynamicbutton.Content = "Test??";
+                    var responseString = response.Content.ReadAsStringAsync().Result;
+                    System.Diagnostics.Debug.WriteLine(responseString);
+                    System.Diagnostics.Debug.WriteLine("GET SUCCESS:");
 
-            stkpanel.Children.Add(dynamicbutton);
-            dynamicbutton.Click += btn_Click;
-            //loc += 20;
+                    Globals.responseString = responseString;
+                }
+            }
+            catch (Exception exception)
+            {
+                System.Diagnostics.Debug.WriteLine("CAUGHT EXCEPTION:");
+                System.Diagnostics.Debug.WriteLine(exception);
+            }
         }
 
-        void btn_Click(object sender, RoutedEventArgs e)
+        //parsing string from http request to extract the labels
+        private static List<string> getLabels(String responseString)
         {
-            // throw new NotImplementedException();
+            string[] stringSeparators = new string[] { "\"Label\":", ",\"Note\":" };
+            List<string> labels = new List<string>();
+            string[] labelsArray, segments;
+            segments = responseString.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries);
+
+            for (int i = 1; i < segments.Length; i = i + 2)
+            {
+                //check if this label has already been added to labels array 
+                if (labels.Contains(segments[i]) == false)
+                {
+                    labels.Add(segments[i]);
+                    System.Diagnostics.Debug.WriteLine(segments[i]);
+
+                }
+            }
+            return labels;
+        }
+
+        private static string getNote(string label, string responseString)
+        {
+            string[] stringSeparators = new string[] { /*label +*/ ",\"Note\":", "}," };
+            string[] segments;
+            segments = responseString.Split(stringSeparators, StringSplitOptions.None);
+            var note = "";
+            for (int i = 0; i < segments.Length; i++)
+            {
+                if (segments[i].Contains(label)) {
+                    note = segments[i + 1];
+                }
+            }
+            return note;
         }
 
         private void textBlock_SelectionChanged(object sender, RoutedEventArgs e)
@@ -69,7 +123,15 @@ namespace Dali
 
         private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            this.Frame.Navigate(typeof(BlankPage3));
+
+            string note = getNote(this.listView.SelectedItem.ToString(), Globals.responseString);
+
+            //populate mark because c# only lets you pass one parameter between frames
+            Mark mark = new Mark();
+            mark.label = this.listView.SelectedItem.ToString();
+            mark.note = note;
+
+            this.Frame.Navigate(typeof(BlankPage2), mark);
         }
     }
 }

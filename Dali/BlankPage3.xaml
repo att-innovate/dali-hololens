@@ -7,9 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="34,42,28,681" TextWrapping="Wrap" Text="Select the old mark you wish to view here" VerticalAlignment="Center" Height="45" Width="370" FontSize="20" SelectionChanged="textBlock_SelectionChanged" Loaded="textBlock_Loaded"/>
-        <ListView x:Name="listView" HorizontalAlignment="Center" Height="588" Margin="30,92,32,88" VerticalAlignment="Center" Width="370"/>
+        <ListView x:Name="listView" HorizontalAlignment="Center" Height="588" Margin="30,92,32,88" VerticalAlignment="Center" Width="370" SelectionChanged="listView_SelectionChanged"/>
 
     </Grid>
 </Page>

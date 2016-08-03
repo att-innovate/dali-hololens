@@ -10,7 +10,7 @@
     <Grid Margin="0,-3,0,3">
         <Button x:ConnectionId='1' x:Name="oldButton" Content="Old" HorizontalAlignment="Center" Margin="174,141,202,595" VerticalAlignment="Center"                        />
         <Button x:ConnectionId='2' x:Name="newButton" Content="New" HorizontalAlignment="Center" Margin="180,241,202,495" VerticalAlignment="Center"                        />
-        <TextBlock x:ConnectionId='3' x:Name="textBlock" HorizontalAlignment="Center" Margin="42,46,52,670" TextWrapping="Wrap" Text="Would you like to create a new mark or view a previously created mark?" VerticalAlignment="Center" RenderTransformOrigin="-0.829,-1.283" Height="52" Width="338" RequestedTheme="Light" Foreground="#FF000005" SelectionHighlightColor="Black" FontFamily="Segoe WP"/>
+        <TextBlock x:ConnectionId='3' x:Name="textBlock" HorizontalAlignment="Center" Margin="42,46,52,670" TextWrapping="Wrap" Text="Would you like to create a new mark or view a previously created mark?" VerticalAlignment="Center" RenderTransformOrigin="-0.829,-1.283" Height="52" Width="338" RequestedTheme="Light" Foreground="#FF000005" SelectionHighlightColor="Black" FontFamily="Segoe WP"                                              />
 
     </Grid>
 </Page>

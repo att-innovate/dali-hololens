@@ -37,9 +37,13 @@ namespace Dali
 
         }
 
-        private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-
+            Mark currentMark = new Mark();
+            currentMark = e.Parameter as Mark;
+            labelText.Text = currentMark.label;
+            noteText.Text = currentMark.note;
         }
+
     }
 }

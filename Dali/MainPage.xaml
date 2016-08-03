@@ -7,10 +7,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Margin="0,-3,0,3">
-        <Button x:Name="oldButton" Content="Old" HorizontalAlignment="Center" Margin="174,141,202,595" VerticalAlignment="Center" Click="oldButton_Click"/>
-        <Button x:Name="newButton" Content="New" HorizontalAlignment="Center" Margin="180,241,202,495" VerticalAlignment="Center" Click="newButton_Click"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="42,46,52,670" TextWrapping="Wrap" Text="Would you like to create a new mark or view a previously created mark?" VerticalAlignment="Center" RenderTransformOrigin="-0.829,-1.283" Height="52" Width="338" RequestedTheme="Light" Foreground="#FF000005" SelectionHighlightColor="Black" FontFamily="Segoe WP"/>
+    <Grid Margin="0,-3,0,3" Background="#FF00B9FF">
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="42,46,52,670" TextWrapping="Wrap" Text="Would you like to create a new mark or view a previously created mark?" VerticalAlignment="Center" RenderTransformOrigin="-0.829,-1.283" Height="52" Width="338" RequestedTheme="Light" Foreground="#FF000005" SelectionHighlightColor="Black" FontFamily="Segoe WP" SelectionChanged="textBlock_SelectionChanged"/>
+        <Button x:Name="newButton" Content="New" HorizontalAlignment="Center" Margin="117,203,142,500" VerticalAlignment="Center" Click="newButton_Click" Height="65" Width="173" Background="#FFEDF1F4"/>
+        <Button x:Name="oldButton" Content="Old" HorizontalAlignment="Center" Margin="117,103,142,610" VerticalAlignment="Center" Click="oldButton_Click" Height="55" Width="173" Background="#FFF3F3F3" Foreground="Black"/>
 
     </Grid>
 </Page>
