@@ -10,6 +10,7 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <TextBlock x:Name="noteText" HorizontalAlignment="Center" Margin="44,135,51,108" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Height="525" Width="337" SelectionChanged="labelBlock_SelectionChanged"/>
         <TextBlock x:Name="labelText" HorizontalAlignment="Center" Margin="32,26,33,682" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Foreground="#FF05021C" Height="60" Width="367" SelectionChanged="notesBlock_SelectionChanged"/>
+        <ListView x:Name="listView" HorizontalAlignment="Left" Height="100" Margin="150,400,0,0" VerticalAlignment="Top" Width="100" SelectionChanged="listView_SelectionChanged"/>
 
     </Grid>
 </Page>

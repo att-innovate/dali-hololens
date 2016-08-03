@@ -66,5 +66,10 @@ namespace Dali
         {
 
         }
+
+        private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(BlankPage3));
+        }
     }
 }

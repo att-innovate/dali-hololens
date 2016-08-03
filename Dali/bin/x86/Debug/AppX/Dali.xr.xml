@@ -52,6 +52,14 @@
     </RootType>
     <RootType FullName="Dali.BlankPage1" />
     <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.ThemeResourceExtension" />
+    <RootType FullName="Windows.UI.Xaml.Controls.ListView">
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Width" />
+      <RootEvent Name="SelectionChanged" />
+    </RootType>
     <RootType FullName="Dali.BlankPage2" />
     <RootType FullName="Dali.BlankPage3" />
     <RootType FullName="Dali.MainPage" />
