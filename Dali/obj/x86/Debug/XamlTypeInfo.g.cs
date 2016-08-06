@@ -132,21 +132,23 @@ namespace Dali.Dali_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[6];
+            _typeNameTable = new string[7];
             _typeNameTable[0] = "Dali.BlankPage1";
             _typeNameTable[1] = "Windows.UI.Xaml.Controls.Page";
             _typeNameTable[2] = "Windows.UI.Xaml.Controls.UserControl";
-            _typeNameTable[3] = "Dali.BlankPage2";
+            _typeNameTable[3] = "Dali.ConfigureMark";
             _typeNameTable[4] = "Dali.BlankPage3";
-            _typeNameTable[5] = "Dali.MainPage";
+            _typeNameTable[5] = "Dali.BlankPage4";
+            _typeNameTable[6] = "Dali.MainPage";
 
-            _typeTable = new global::System.Type[6];
+            _typeTable = new global::System.Type[7];
             _typeTable[0] = typeof(global::Dali.BlankPage1);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.Page);
             _typeTable[2] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
-            _typeTable[3] = typeof(global::Dali.BlankPage2);
+            _typeTable[3] = typeof(global::Dali.ConfigureMark);
             _typeTable[4] = typeof(global::Dali.BlankPage3);
-            _typeTable[5] = typeof(global::Dali.MainPage);
+            _typeTable[5] = typeof(global::Dali.BlankPage4);
+            _typeTable[6] = typeof(global::Dali.MainPage);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -182,9 +184,10 @@ namespace Dali.Dali_XamlTypeInfo
         }
 
         private object Activate_0_BlankPage1() { return new global::Dali.BlankPage1(); }
-        private object Activate_3_BlankPage2() { return new global::Dali.BlankPage2(); }
+        private object Activate_3_ConfigureMark() { return new global::Dali.ConfigureMark(); }
         private object Activate_4_BlankPage3() { return new global::Dali.BlankPage3(); }
-        private object Activate_5_MainPage() { return new global::Dali.MainPage(); }
+        private object Activate_5_BlankPage4() { return new global::Dali.BlankPage4(); }
+        private object Activate_6_MainPage() { return new global::Dali.MainPage(); }
 
         private global::Windows.UI.Xaml.Markup.IXamlType CreateXamlType(int typeIndex)
         {
@@ -211,9 +214,9 @@ namespace Dali.Dali_XamlTypeInfo
                 xamlType = new global::Dali.Dali_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 3:   //  Dali.BlankPage2
+            case 3:   //  Dali.ConfigureMark
                 userType = new global::Dali.Dali_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_3_BlankPage2;
+                userType.Activator = Activate_3_ConfigureMark;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -225,9 +228,16 @@ namespace Dali.Dali_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 5:   //  Dali.MainPage
+            case 5:   //  Dali.BlankPage4
                 userType = new global::Dali.Dali_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_5_MainPage;
+                userType.Activator = Activate_5_BlankPage4;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 6:   //  Dali.MainPage
+                userType = new global::Dali.Dali_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_6_MainPage;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;

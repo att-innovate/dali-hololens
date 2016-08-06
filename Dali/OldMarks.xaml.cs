@@ -32,15 +32,9 @@ namespace Dali
         public static String responseString = "";
     }
 
-    public class Mark
+    public sealed partial class OldMarks : Page
     {
-        public string label { get; set; }
-        public string note { get; set; }
-    }
-
-    public sealed partial class BlankPage3 : Page
-    {
-        public BlankPage3()
+        public OldMarks()
         {
             this.InitializeComponent();
             GetRequest("http://10.250.3.24:8085/mark");
@@ -62,7 +56,6 @@ namespace Dali
                     var response = client.GetAsync("/mark").Result;
 
                     var responseString = response.Content.ReadAsStringAsync().Result;
-                    System.Diagnostics.Debug.WriteLine(responseString);
                     System.Diagnostics.Debug.WriteLine("GET SUCCESS:");
 
                     Globals.responseString = responseString;
@@ -89,8 +82,6 @@ namespace Dali
                 if (labels.Contains(segments[i]) == false)
                 {
                     labels.Add(segments[i]);
-                    System.Diagnostics.Debug.WriteLine(segments[i]);
-
                 }
             }
             return labels;
@@ -124,14 +115,14 @@ namespace Dali
         private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            string note = getNote(this.listView.SelectedItem.ToString(), Globals.responseString);
+            //string note = getNote(this.listView.SelectedItem.ToString(), Globals.responseString);
 
             //populate mark because c# only lets you pass one parameter between frames
             Mark mark = new Mark();
             mark.label = this.listView.SelectedItem.ToString();
-            mark.note = note;
+            mark.type = "";
 
-            this.Frame.Navigate(typeof(BlankPage2), mark);
+            this.Frame.Navigate(typeof(ConfigureMark), mark);
         }
     }
 }

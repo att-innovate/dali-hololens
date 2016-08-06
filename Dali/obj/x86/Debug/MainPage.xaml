@@ -8,7 +8,8 @@
     mc:Ignorable="d">
 
     <Grid Margin="0,-3,0,3" Background="#FF00B9FF">
-        <Button x:Name="introButton" Content="Augment Your Space" HorizontalAlignment="Center" Margin="130,313,129,390" VerticalAlignment="Center" Click="introMessage_Click" Height="65" Width="173" Background="#FFEDF1F4"/>
+        <Button x:ConnectionId='1' x:Name="introButton" Content="Augment Your Space" HorizontalAlignment="Center" Margin="130,313,129,390" VerticalAlignment="Center"                            Height="65" Width="173" Background="#FFEDF1F4"/>
 
     </Grid>
 </Page>
+

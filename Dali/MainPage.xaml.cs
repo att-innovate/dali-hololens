@@ -31,20 +31,9 @@ namespace Dali
             this.InitializeComponent();
         }
 
-        private void newButton_Click(object sender, RoutedEventArgs e)
+        private void introMessage_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(BlankPage1));
-
-        }
-
-        private void oldButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(BlankPage3));
-        }
-
-        private void textBlock_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-
+            this.Frame.Navigate(typeof(BlankPage4));
         }
     }
 }
