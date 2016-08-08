@@ -72,7 +72,7 @@ namespace Dali
         //parsing string from http request to extract the labels
         private static List<string> getLabels(String responseString)
         {
-            string[] stringSeparators = new string[] { "\"Label\":", ",\"Note\":" };
+            string[] stringSeparators = new string[] { "\"Label\":", ",\"Type\":" };
             List<string> labels = new List<string>();
             string[] labelsArray, segments;
             segments = responseString.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries);

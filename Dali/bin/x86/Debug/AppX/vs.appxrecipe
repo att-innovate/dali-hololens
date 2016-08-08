@@ -28,13 +28,13 @@
     <AppXManifest Include="C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-08-08T18:24:46.191</Modified>
+      <Modified>2016-08-08T19:12:45.188</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\bin\x86\Debug\Dali.exe">
       <PackagePath>entrypoint\Dali.exe</PackagePath>
-      <Modified>2016-08-08T18:24:45.802</Modified>
+      <Modified>2016-08-08T19:12:44.749</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\.nuget\packages\Microsoft.CSharp\4.0.0\lib\netcore50\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -504,7 +504,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\bin\x86\Debug\Core\Dali.exe">
       <PackagePath>Dali.exe</PackagePath>
-      <Modified>2016-08-08T18:24:46.189</Modified>
+      <Modified>2016-08-08T19:12:45.182</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
