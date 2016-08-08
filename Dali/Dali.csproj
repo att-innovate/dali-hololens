@@ -95,17 +95,17 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BlankPage1.xaml.cs">
-      <DependentUpon>BlankPage1.xaml</DependentUpon>
+    <Compile Include="SetNewMark.xaml.cs">
+      <DependentUpon>SetNewMark.xaml</DependentUpon>
     </Compile>
     <Compile Include="ConfigureMark.xaml.cs">
       <DependentUpon>ConfigureMark.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BlankPage3.xaml.cs">
-      <DependentUpon>BlankPage3.xaml</DependentUpon>
+    <Compile Include="OldMarks.xaml.cs">
+      <DependentUpon>OldMarks.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BlankPage4.xaml.cs">
-      <DependentUpon>BlankPage4.xaml</DependentUpon>
+    <Compile Include="OldNewMenu.xaml.cs">
+      <DependentUpon>OldNewMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -133,7 +133,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="BlankPage1.xaml">
+    <Page Include="SetNewMark.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -141,11 +141,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BlankPage3.xaml">
+    <Page Include="OldMarks.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BlankPage4.xaml">
+    <Page Include="OldNewMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

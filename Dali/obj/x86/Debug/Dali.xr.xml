@@ -38,7 +38,7 @@
       <RootProperty Name="Foreground" />
       <RootEvent Name="Click" />
     </RootType>
-    <RootType FullName="Dali.BlankPage1" />
+    <RootType FullName="Dali.SetNewMark" />
     <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.ThemeResourceExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.TextBlock">
       <RootProperty Name="HorizontalAlignment" />
@@ -66,11 +66,11 @@
       <RootProperty Name="Width" />
       <RootEvent Name="SelectionChanged" />
     </RootType>
-    <RootType FullName="Dali.BlankPage3" />
+    <RootType FullName="Dali.OldMarks" />
     <RootType FullName="Windows.UI.Xaml.Controls.RowDefinition">
       <RootProperty Name="Height" />
     </RootType>
-    <RootType FullName="Dali.BlankPage4" />
+    <RootType FullName="Dali.OldNewMenu" />
     <RootType FullName="Dali.MainPage" />
   </Roots.RootTypes>
 </Roots>

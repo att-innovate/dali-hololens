@@ -1,0 +1,16 @@
+﻿<Page
+    x:Class="Dali.OldMarks"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Dali"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid>
+        <TextBlock x:ConnectionId='1' x:Name="textBlock" HorizontalAlignment="Center" Margin="34,42,28,681" TextWrapping="Wrap" Text="Select the old mark you wish to view here" VerticalAlignment="Center" Height="45" Width="370" FontSize="20"                                                                        />
+        <ListView x:ConnectionId='2' x:Name="listView" HorizontalAlignment="Center" Height="588" Margin="30,92,32,88" VerticalAlignment="Center" Width="370"                                             />
+
+    </Grid>
+</Page>
+

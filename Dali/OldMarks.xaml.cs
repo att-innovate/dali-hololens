@@ -29,7 +29,8 @@ namespace Dali
 
     public static class Globals
     {
-        public static String responseString = "";
+        public static String getResponseString = "";
+        public static String newId= "";
     }
 
     public sealed partial class OldMarks : Page
@@ -37,8 +38,8 @@ namespace Dali
         public OldMarks()
         {
             this.InitializeComponent();
-            GetRequest("http://10.250.3.24:8085/mark");
-            listView.ItemsSource = getLabels(Globals.responseString);
+            GetRequest("http://10.250.3.24:8085");
+            listView.ItemsSource = getLabels(Globals.getResponseString);
         }
 
         async static void GetRequest(string url)
@@ -53,12 +54,12 @@ namespace Dali
                                 .Add(new MediaTypeWithQualityHeaderValue("application/json"));//ACCEPT header
                     HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "relativeAddress");
 
-                    var response = client.GetAsync("/mark").Result;
+                    var response = client.GetAsync("/mark/").Result;
 
                     var responseString = response.Content.ReadAsStringAsync().Result;
                     System.Diagnostics.Debug.WriteLine("GET SUCCESS:");
 
-                    Globals.responseString = responseString;
+                    Globals.getResponseString = responseString;
                 }
             }
             catch (Exception exception)

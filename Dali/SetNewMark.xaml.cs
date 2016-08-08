@@ -44,6 +44,55 @@ namespace Dali
 
         async static void PostRequest(string url, string newLabel)
         {
+            getId(url);
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(url);
+                
+                    var mark = new Mark();
+                    mark.id = Globals.newId;
+                    mark.label = newLabel;
+                    mark.type = "";
+                    mark.content = new string[] {};
+
+                    //serialize struct into a JSON String
+                    var json = JsonConvert.SerializeObject(mark);
+                    System.Diagnostics.Debug.WriteLine("JSON", json);
+
+                    // Wrap our JSON inside a StringContent which then can be used by the HttpClient class
+                    var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+                    //  Product deserializedProduct = JsonConvert.DeserializeObject<Product>(json);
+
+                    // Do the actual request and await the response
+                    var httpResponse = await client.PostAsync("/mark/", httpContent);
+
+                    // If the response contains content we want to read it!
+                    if (httpResponse.Content != null)
+                    {
+                        var responseContent = await httpResponse.Content.ReadAsStringAsync();
+                        System.Diagnostics.Debug.WriteLine(responseContent);
+
+                        System.Diagnostics.Debug.WriteLine("POST SUCCESS:");
+                    }
+
+                    /// var response = client.PostAsync("/mark", request.Content).Result;
+                    //var responseString = response.Content.ReadAsStringAsync().Result;
+                    // System.Diagnostics.Debug.WriteLine(responseString);
+                    //System.Diagnostics.Debug.WriteLine("POST SUCCESS:");
+                }
+            }
+            catch (Exception exception)
+            {
+                System.Diagnostics.Debug.WriteLine("CAUGHT EXCEPTION:");
+                System.Diagnostics.Debug.WriteLine(exception);
+            }
+        }
+
+        async static void getId(string url)
+        {
             try
             {
                 using (HttpClient client = new HttpClient())
@@ -53,35 +102,14 @@ namespace Dali
                                 .Accept
                                 .Add(new MediaTypeWithQualityHeaderValue("application/json"));//ACCEPT header
                     HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "relativeAddress");
-                    //var tempString = "{\"label\":\"#replace#\"}";
-                    //var result = tempString.Replace("#replace#", newLabel);
-                    //System.Diagnostics.Debug.Write(result);
-                    //request.Content = new StringContent(result,
-                                                       // Encoding.UTF8,
-                                                        //"application/json");//CONTENT-TYPE header
 
-                    Mark mark = new Mark();
-                    mark.id = "";
-                    mark.label = "";
-                    mark.type = "";
-                    mark.content = new string[] {};
+                    var response = client.GetAsync("/id/").Result;
 
-                    var json = JsonConvert.SerializeObject(mark);
-                    System.Diagnostics.Debug.Write(json);
-
-
-                   // request.Content = json;
-
-                    request.Content = new StringContent(json,
-                                                        Encoding.UTF8,
-                                                        "application/json");//CONTENT-TYPE header
-
-                    //  Product deserializedProduct = JsonConvert.DeserializeObject<Product>(json);
-
-                    var response = client.PostAsync("/mark", request.Content).Result;
                     var responseString = response.Content.ReadAsStringAsync().Result;
-                    System.Diagnostics.Debug.Write(responseString);
-                    System.Diagnostics.Debug.WriteLine("POST SUCCESS:");
+                    System.Diagnostics.Debug.WriteLine("GET SUCCESS:");
+
+                    var id = extractIdFromString(responseString);
+                    Globals.newId = id;
                 }
             }
             catch (Exception exception)
@@ -90,6 +118,20 @@ namespace Dali
                 System.Diagnostics.Debug.WriteLine(exception);
             }
         }
+
+        //parsing string from http request to extract the labels
+        private static string extractIdFromString(String responseString)
+        {
+            string[] stringSeparators = new string[] { "\"message\":", "}" };
+            string[] segments;
+            segments = responseString.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries);
+
+            var id = segments[1].Remove(segments[1].Length - 2);
+            id = id.Remove(0, 1);
+
+            return id;
+        }
+
 
         private void button_Click(object sender, RoutedEventArgs e)
         {

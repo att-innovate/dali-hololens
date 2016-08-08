@@ -20,21 +20,21 @@ namespace Dali
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class BlankPage4 : Page
+    public sealed partial class OldNewMenu : Page
     {
-        public BlankPage4()
+        public OldNewMenu()
         {
             this.InitializeComponent();
         }
 
         private void oldButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(BlankPage3));
+            this.Frame.Navigate(typeof(OldMarks));
         }
 
         private void newButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(BlankPage1));
+            this.Frame.Navigate(typeof(SetNewMark));
         }
 
         private void textBlock_SelectionChanged(object sender, RoutedEventArgs e)
