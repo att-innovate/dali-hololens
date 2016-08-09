@@ -337,6 +337,9 @@
     <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\.nuget\packages\System.Xml.XmlSerializer\4.0.10\lib\netcore50\System.Xml.XmlSerializer.dll">
       <PackagePath>System.Xml.XmlSerializer.dll</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\Assets\th7RCD10QT.jpg">
+      <PackagePath>Assets\th7RCD10QT.jpg</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
     </AppxPackagedFile>

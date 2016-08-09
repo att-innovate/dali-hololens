@@ -4,6 +4,7 @@
     <RootType FullName="Windows.UI.Xaml.Application">
       <RootProperty Name="RequestedTheme" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.ResourceDictionary" />
     <RootType FullName="Windows.UI.Xaml.Controls.Page">
       <RootProperty Name="Content" />
     </RootType>
@@ -38,7 +39,7 @@
       <RootProperty Name="Foreground" />
       <RootEvent Name="Click" />
     </RootType>
-    <RootType FullName="Dali.SetNewMark" />
+    <RootType FullName="Dali.Views.SetNewMark" />
     <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.ThemeResourceExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.TextBlock">
       <RootProperty Name="HorizontalAlignment" />
@@ -57,7 +58,7 @@
       <RootEvent Name="SelectionChanged" />
       <RootEvent Name="Loaded" />
     </RootType>
-    <RootType FullName="Dali.ConfigureMark" />
+    <RootType FullName="Dali.Views.ConfigureMark" />
     <RootType FullName="Windows.UI.Xaml.Controls.ListView">
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Height" />
@@ -66,11 +67,12 @@
       <RootProperty Name="Width" />
       <RootEvent Name="SelectionChanged" />
     </RootType>
-    <RootType FullName="Dali.OldMarks" />
+    <RootType FullName="Dali.Views.OldMarks" />
     <RootType FullName="Windows.UI.Xaml.Controls.RowDefinition">
       <RootProperty Name="Height" />
     </RootType>
-    <RootType FullName="Dali.OldNewMenu" />
-    <RootType FullName="Dali.MainPage" />
+    <RootType FullName="Dali.Views.OldNewMenu" />
+    <RootType FullName="Dali.Views.MainPage" />
+    <RootType FullName="Dali.Views.MasterDetailPage" />
   </Roots.RootTypes>
 </Roots>

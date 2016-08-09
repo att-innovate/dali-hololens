@@ -1,0 +1,15 @@
+﻿<Page
+    x:Class="Dali.Views.SetNewMark"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Dali.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    
+    <Grid Margin="0,-3,0,3">
+        <TextBox x:ConnectionId='1' x:Name="textBox" HorizontalAlignment="Center" Margin="37,66,139,670" TextWrapping="Wrap" Text="" VerticalAlignment="Center" RenderTransformOrigin="0.158,0.676" PlaceholderText="Label this Spot"                                   Background="#FFFF2F2F" FontWeight="Bold" Width="256" Foreground="#FFF10303"/>
+        <Button x:ConnectionId='2' x:Name="button" Content="Done" HorizontalAlignment="Center" Margin="320,66,56,670" VerticalAlignment="Center"                     />
+    </Grid>
+</Page>
+
