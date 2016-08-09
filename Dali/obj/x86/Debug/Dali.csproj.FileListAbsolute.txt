@@ -602,3 +602,8 @@ C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\obj\x86\Debug\Views\Mast
 C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\obj\x86\Debug\Views\MasterDetailPage.xbf
 C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\bin\x86\Debug\Themes\Generic.xbf
 C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\bin\x86\Debug\Views\MasterDetailPage.xbf
+C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\obj\x86\Debug\Views\webView.g.i.cs
+C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\obj\x86\Debug\Views\webView.g.cs
+C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\obj\x86\Debug\Views\webView.xaml
+C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\obj\x86\Debug\Views\webView.xbf
+C:\Users\Sarah Radzihovsky\Documents\Dali-HoloLens\Dali\bin\x86\Debug\Views\webView.xbf

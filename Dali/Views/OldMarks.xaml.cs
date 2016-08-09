@@ -17,6 +17,10 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
+
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -29,8 +33,8 @@ namespace Dali.Views
 
     public static class Globals
     {
-        public static String getResponseString = "";
-        public static String newId= "";
+        // public static String getResponseString = "";
+        public static String newId = "";
     }
 
     public sealed partial class OldMarks : Page
@@ -39,10 +43,9 @@ namespace Dali.Views
         {
             this.InitializeComponent();
             GetRequest("http://10.250.3.24:8085");
-            listView.ItemsSource = getLabels(Globals.getResponseString);
         }
 
-        async static void GetRequest(string url)
+        async void GetRequest(string url)
         {
             try
             {
@@ -52,14 +55,48 @@ namespace Dali.Views
                     client.DefaultRequestHeaders
                                 .Accept
                                 .Add(new MediaTypeWithQualityHeaderValue("application/json"));//ACCEPT header
-                    HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "relativeAddress");
+                    HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "relativeAddress");
 
-                    var response = client.GetAsync("/mark/").Result;
+                    using (var response = client.GetAsync("/mark/").Result)
+                    {
 
-                    var responseString = response.Content.ReadAsStringAsync().Result;
-                    System.Diagnostics.Debug.WriteLine("GET SUCCESS:");
+                        string responseString = response.Content.ReadAsStringAsync().Result;
+                        System.Diagnostics.Debug.WriteLine("GET SUCCESS:");
+                        System.Diagnostics.Debug.WriteLine(responseString);
 
-                    Globals.getResponseString = responseString;
+
+                        this.listView.ItemsSource = getLabels(responseString);
+
+                        JObject o = JObject.Parse(responseString);
+                        System.Diagnostics.Debug.WriteLine("DeserializedJson:", o.ToString());
+
+
+                        //    getMarks(responseString);
+                        // dynamic mList = JsonConvert.DeserializeObject<Dictionary<string,Mark[]>>(responseString);
+
+
+                        // var results = JsonConvert.DeserializeObject<List<Mark>>(responseString);
+                        //System.Diagnostics.Debug.WriteLine("DeserializedJson:", mList);
+
+                        /*                        for (int i = 0; i < results.Count; i++)
+                                                {
+                                                    var markId = results[i].id;
+                                                    var markLabel = results[i].label;
+                                                    System.Diagnostics.Debug.WriteLine(markId);
+                                                    System.Diagnostics.Debug.WriteLine(markLabel);
+
+                                                } */
+
+
+                        /* if (response.IsSuccessStatusCode)
+                         {
+                             var result = JsonConvert.DeserializeObject<Mark>(response.Content.ReadAsStringAsync().Result);
+                             System.Diagnostics.Debug.WriteLine("HELO");
+
+                         }*/
+
+                    }
+
                 }
             }
             catch (Exception exception)
@@ -96,7 +133,8 @@ namespace Dali.Views
             var note = "";
             for (int i = 0; i < segments.Length; i++)
             {
-                if (segments[i].Contains(label)) {
+                if (segments[i].Contains(label))
+                {
                     note = segments[i + 1];
                 }
             }
@@ -121,9 +159,11 @@ namespace Dali.Views
             //populate mark because c# only lets you pass one parameter between frames
             Mark mark = new Mark();
             mark.label = this.listView.SelectedItem.ToString();
-            mark.type = "";
+            mark.id = "";
 
-            this.Frame.Navigate(typeof(ConfigureMark), mark);
+            // this.Frame.Navigate(typeof(ConfigureMark), mark);
+            this.Frame.Navigate(typeof(webView), mark);
+
         }
     }
 }

@@ -132,7 +132,7 @@ namespace Dali.Dali_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[8];
+            _typeNameTable = new string[9];
             _typeNameTable[0] = "Dali.Views.SetNewMark";
             _typeNameTable[1] = "Windows.UI.Xaml.Controls.Page";
             _typeNameTable[2] = "Windows.UI.Xaml.Controls.UserControl";
@@ -141,8 +141,9 @@ namespace Dali.Dali_XamlTypeInfo
             _typeNameTable[5] = "Dali.Views.OldNewMenu";
             _typeNameTable[6] = "Dali.Views.MainPage";
             _typeNameTable[7] = "Dali.Views.MasterDetailPage";
+            _typeNameTable[8] = "Dali.Views.webView";
 
-            _typeTable = new global::System.Type[8];
+            _typeTable = new global::System.Type[9];
             _typeTable[0] = typeof(global::Dali.Views.SetNewMark);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.Page);
             _typeTable[2] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
@@ -151,6 +152,7 @@ namespace Dali.Dali_XamlTypeInfo
             _typeTable[5] = typeof(global::Dali.Views.OldNewMenu);
             _typeTable[6] = typeof(global::Dali.Views.MainPage);
             _typeTable[7] = typeof(global::Dali.Views.MasterDetailPage);
+            _typeTable[8] = typeof(global::Dali.Views.webView);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -191,6 +193,7 @@ namespace Dali.Dali_XamlTypeInfo
         private object Activate_5_OldNewMenu() { return new global::Dali.Views.OldNewMenu(); }
         private object Activate_6_MainPage() { return new global::Dali.Views.MainPage(); }
         private object Activate_7_MasterDetailPage() { return new global::Dali.Views.MasterDetailPage(); }
+        private object Activate_8_webView() { return new global::Dali.Views.webView(); }
 
         private global::Windows.UI.Xaml.Markup.IXamlType CreateXamlType(int typeIndex)
         {
@@ -248,6 +251,13 @@ namespace Dali.Dali_XamlTypeInfo
             case 7:   //  Dali.Views.MasterDetailPage
                 userType = new global::Dali.Dali_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
                 userType.Activator = Activate_7_MasterDetailPage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 8:   //  Dali.Views.webView
+                userType = new global::Dali.Dali_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_8_webView;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;

@@ -33,7 +33,7 @@ namespace Dali.Views
 
         private void introMessage_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(OldNewMenu));
+             this.Frame.Navigate(typeof(OldNewMenu));
         }
     }
 }

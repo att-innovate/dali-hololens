@@ -29,9 +29,13 @@ namespace Dali.Views
 
     public class Mark
     {
+        [JsonProperty(PropertyName = "id")]
         public string id { get; set; }
+        [JsonProperty(PropertyName = "Label")]
         public string label { get; set; }
+        [JsonProperty(PropertyName = "Type")]
         public string type { get; set; }
+        [JsonProperty(PropertyName = "Content")]
         public string[] content { get; set; }
     }
 
@@ -64,8 +68,6 @@ namespace Dali.Views
                     // Wrap our JSON inside a StringContent which then can be used by the HttpClient class
                     var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
 
-                    //  Product deserializedProduct = JsonConvert.DeserializeObject<Product>(json);
-
                     // Do the actual request and await the response
                     var httpResponse = await client.PostAsync("/mark/", httpContent);
 
@@ -77,11 +79,6 @@ namespace Dali.Views
 
                         System.Diagnostics.Debug.WriteLine("POST SUCCESS:");
                     }
-
-                    /// var response = client.PostAsync("/mark", request.Content).Result;
-                    //var responseString = response.Content.ReadAsStringAsync().Result;
-                    // System.Diagnostics.Debug.WriteLine(responseString);
-                    //System.Diagnostics.Debug.WriteLine("POST SUCCESS:");
                 }
             }
             catch (Exception exception)
