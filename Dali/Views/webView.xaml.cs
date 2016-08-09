@@ -25,106 +25,25 @@ namespace Dali.Views
         public webView()
         {
             this.InitializeComponent();
-        }
-
-        static string UriToString(Uri uri)
-        {
-            return (uri != null) ? uri.ToString() : "";
-        }
-
-        /// <summary>
-        /// This is the click handler for the "Go" button.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void GoButton_Click()
-        {
-            if (!pageIsLoading)
-            {
-                NavigateWebview(AddressBox.Text);
-            }
-            else
-            {
-                WebViewControl.Stop();
-                pageIsLoading = false;
-            }
-        }
-
-        /// <summary>
-        /// Property to control the "Go" button text, forward/backward buttons and progress ring.
-        /// </summary>
-        private bool _pageIsLoading;
-        bool pageIsLoading
-        {
-            get { return _pageIsLoading; }
-            set
-            {
-                _pageIsLoading = value;
-                GoButton.Content = (value ? "Stop" : "Go");
-                ProgressControl.IsActive = value;
-
-                if (!value)
-                {
-                    NavigateBackButton.IsEnabled = WebViewControl.CanGoBack;
-                    NavigateForwardButton.IsEnabled = WebViewControl.CanGoForward;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Handler for the NavigateBackward button
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void NavigateBackward_Click()
-        {
-            if (WebViewControl.CanGoBack) WebViewControl.GoBack();
-        }
-
-        /// <summary>
-        /// Handler for the GoForward button
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void NavigateForward_Click()
-        {
-            if (WebViewControl.CanGoForward) WebViewControl.GoForward();
-        }
-
-        /// <summary>
-        /// This handles the enter key in the url address box
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void Address_KeyUp(object sender, KeyRoutedEventArgs e)
-        {
-            if (e.Key == Windows.System.VirtualKey.Enter)
-            {
-                NavigateWebview(AddressBox.Text);
-            }
-        }
-
-        private const string htmlFragment =
-                   "<html><head><script type='text/javascript'>" +
-                   "function doubleIt(incoming){ " +
-                   "  var intIncoming = parseInt(incoming, 10);" +
-                   "  var doubled = intIncoming * 2;" +
-                   "  document.body.style.fontSize= doubled.toString() + 'px';" +
-                   "  window.external.notify('The script says the doubled value is ' + doubled.toString());" +
-                   "};" +
-                   "</script></head><body><div id='myDiv'>I AM CONTENT</div></body></html>";
-
-        /// <summary>
-        /// Helper to perform the navigation in webview
-        /// </summary>
-        /// <param name="url"></param>
-        private void NavigateWebview(string url)
-        {
             try
             {
-                Uri targetUri = new Uri(url);
-                WebViewControl.Navigate(targetUri);
-               // WebViewControl.NavigateToString(htmlFragment);
+                var selectedMark = Globals.selectedMark;
+                switch(selectedMark.type)
+                {
+                    case "note":
+                        WebViewControl.NavigateToString(htmlNote);
+                        break;
+                    case "tasklist":
+                        WebViewControl.NavigateToString(htmlTasklist);
+                        break;
+                    case "image":
+                        WebViewControl.NavigateToString(htmlImage);
+                        break;
+                    case "url":
+                        Uri targetUri = new Uri(selectedMark.content[0]);
+                        WebViewControl.Navigate(targetUri);
+                        break;
+                }         
             }
             catch (UriFormatException ex)
             {
@@ -132,6 +51,41 @@ namespace Dali.Views
                 AppendLog($"Address is invalid, try again. Error: {ex.Message}.");
             }
         }
+
+        static string UriToString(Uri uri)
+        {
+            return (uri != null) ? uri.ToString() : "";
+        }
+
+        private const string htmlNote =
+                   "<html><head><script type='text/javascript'>" +
+                  "function doubleIt(incoming){ " +
+                  "  var intIncoming = parseInt(incoming, 10);" +
+                  "  var doubled = intIncoming * 2;" +
+                  "  document.body.style.fontSize= doubled.toString() + 'px';" +
+                  "  window.external.notify('The script says the doubled value is ' + doubled.toString());" +
+                  "};" +
+                  "</script></head><body><div id='myDiv'>I AM CONTENT</div></body></html>";
+
+        private const string htmlTasklist =
+                  "<html><head><script type='text/javascript'>" +
+                  "function doubleIt(incoming){ " +
+                  "  var intIncoming = parseInt(incoming, 10);" +
+                  "  var doubled = intIncoming * 2;" +
+                  "  document.body.style.fontSize= doubled.toString() + 'px';" +
+                  "  window.external.notify('The script says the doubled value is ' + doubled.toString());" +
+                  "};" +
+                  "</script></head><body><div id='myDiv'>I AM CONTENT</div></body></html>";
+
+        private const string htmlImage =
+                  "<html><head><script type='text/javascript'>" +
+                  "function doubleIt(incoming){ " +
+                  "  var intIncoming = parseInt(incoming, 10);" +
+                  "  var doubled = intIncoming * 2;" +
+                  "  document.body.style.fontSize= doubled.toString() + 'px';" +
+                  "  window.external.notify('The script says the doubled value is ' + doubled.toString());" +
+                  "};" +
+                  "</script></head><body><div id='myDiv'>I AM CONTENT</div></body></html>";
 
         /// <summary>
         /// Handle the event that indicates that WebView is starting a navigation.
@@ -141,9 +95,7 @@ namespace Dali.Views
         void WebViewControl_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
         {
             string url = UriToString(args.Uri);
-            AddressBox.Text = url;
             AppendLog($"Starting navigation to: \"{url}\".");
-            pageIsLoading = true;
         }
 
         /// <summary>
@@ -157,7 +109,6 @@ namespace Dali.Views
             AppendLog($"Content for \"{UriToString(args.Uri)}\" cannot be loaded into webview.");
             // We throw away the request. See the "Unviewable content" scenario for other
             // ways of handling the event.
-            pageIsLoading = false;
         }
 
         /// <summary>
@@ -189,7 +140,6 @@ namespace Dali.Views
         /// <param name="args"></param>
         void WebViewControl_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
         {
-            pageIsLoading = false;
             if (args.IsSuccess)
             {
                 AppendLog($"Navigation to \"{UriToString(args.Uri)}\" completed successfully.");

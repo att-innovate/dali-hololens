@@ -35,7 +35,6 @@
       <RootProperty Name="Width" />
       <RootProperty Name="Foreground" />
       <RootEvent Name="TextChanged" />
-      <RootEvent Name="KeyUp" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Button">
       <RootProperty Name="Content" />
@@ -46,7 +45,6 @@
       <RootProperty Name="Width" />
       <RootProperty Name="Background" />
       <RootProperty Name="Foreground" />
-      <RootProperty Name="IsEnabled" />
       <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Dali.Views.SetNewMark" />
@@ -65,7 +63,6 @@
       <RootProperty Name="RequestedTheme" />
       <RootProperty Name="SelectionHighlightColor" />
       <RootProperty Name="FontFamily" />
-      <RootProperty Name="Inlines" />
       <RootEvent Name="SelectionChanged" />
       <RootEvent Name="Loaded" />
     </RootType>
@@ -105,11 +102,6 @@
       <RootEvent Name="UnviewableContentIdentified" />
       <RootEvent Name="NavigationCompleted" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.ProgressRing">
-      <RootProperty Name="Height" />
-      <RootProperty Name="Width" />
-    </RootType>
-    <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.BindExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
       <RootProperty Name="Width" />
     </RootType>
