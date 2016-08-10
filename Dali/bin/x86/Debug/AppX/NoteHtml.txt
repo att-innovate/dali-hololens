@@ -1,6 +1,6 @@
 <html>
-	<body>
-	Label:
+<body>
+Label:
 This is a new line...
-	</body>
+</body>
 </html>

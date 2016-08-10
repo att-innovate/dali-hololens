@@ -28,70 +28,68 @@ namespace Dali.Views
             try
             {
                 var selectedMark = Globals.selectedMark;
-                switch(selectedMark.type)
+
+                System.IO.File.WriteAllText("NoteHtml.txt", string.Empty);
+                List<string> lines = new List<string>
+                    { "<html>", "<body>", "Label:", "</body>", "</html>" };
+
+                switch (selectedMark.type)
                 {
                     case "note":
-                        WebViewControl.NavigateToString(htmlNote);
+                        lines.Insert(3, selectedMark.label);
+                        lines.Insert(4, "Note: " + selectedMark.content[0]);
+                        File.WriteAllLines("NoteHtml.txt", lines.ToArray());
+                        string path = File.ReadAllText("NoteHtml.txt");
+
+                        if (!File.Exists(path))
+                        {
+                            WebViewControl.NavigateToString(path);
+                        }
                         break;
                     case "tasklist":
-                        WebViewControl.NavigateToString(htmlTasklist);
+                        lines.Insert(3, selectedMark.label);
+                        lines.Insert(4, "Tasklist <br/>");
+                        for (int i = 5; i < (selectedMark.content.Length + 4); i++)
+                        {
+                            lines.Insert(i, selectedMark.content[i - 5]);
+
+                        }
+                        File.WriteAllLines("NoteHtml.txt", lines.ToArray());
+                        path = File.ReadAllText("NoteHtml.txt");
+
+                        if (!File.Exists(path))
+                        {
+                            WebViewControl.NavigateToString(path);
+                        }
                         break;
                     case "image":
-                        WebViewControl.NavigateToString(htmlImage);
+                        lines.Insert(3, selectedMark.label);
+                        lines.Insert(4, "< h2 >" + selectedMark.content[0] + "</ h2 >");
+                        lines.Insert(5, "<img src='pic_mountain.jpg' alt='Mountain View' style='width: 304px; height: 228px; '>");
+                        File.WriteAllLines("NoteHtml.txt", lines.ToArray());
+                        path = File.ReadAllText("NoteHtml.txt");
+
+                        if (!File.Exists(path))
+                        {
+                            WebViewControl.NavigateToString(path);
+                        }
                         break;
                     case "url":
                         Uri targetUri = new Uri(selectedMark.content[0]);
                         WebViewControl.Navigate(targetUri);
                         break;
                     case "":
-                        //string path = File.ReadAllText(@"C:\User\Sarah Radzihovsky\Desktop\HtmlTest.txt");
-                        // var path = Path.Combine(Directory.GetCurrentDirectory(), "HtmlTest.txt");
+                        lines.Insert(3, "This is a new line...");
+                        File.WriteAllLines("NoteHtml.txt", lines.ToArray());
+                        path = File.ReadAllText("NoteHtml.txt");
 
-                        var allLines = File.ReadAllLines("NoteHtml.txt").ToList();
-                        allLines.Insert(3, "This is a new line...");
-                        File.WriteAllLines("NoteHtml.txt", allLines.ToArray());
-
-                       // StreamWriter file = new StreamWriter((@"C:\HtmlTest.txt");
-                      //  file.WriteLine(lines);
-                        string path = File.ReadAllText("NoteHtml.txt");
-
-                       /* var sb = new StringBuilder();
-                        using (var sr = new StreamReader("inputFileName"))
-                        {
-                            string line;
-                            do
-                            {
-                                line = sr.ReadLine();
-                                sb.AppendLine(line);
-                            } while (!line.Contains("<body>"));
-
-                            sb.Append(selectedMark.content.);
-                            sb.Append(sr.ReadToEnd());
-                        }
-
-                        using (var sr = new StreamWriter("outputFileName"))
-                        {
-                            sr.Write(sb.ToString());
-                        }
-
-
-                        // Example #4: Append new text to an existing file.
-                        // The using statement automatically flushes AND CLOSES the stream and calls 
-                        // IDisposable.Dispose on the stream object.
-                        using (System.IO.StreamWriter file =
-                            new System.IO.StreamWriter(@"C:\Users\Public\TestFolder\WriteLines2.txt", true))
-                        {
-                            file.WriteLine("Fourth line");
-                        }
-                        */
-
-            if (!File.Exists(path))
+                        if (!File.Exists(path))
                         {
                             WebViewControl.NavigateToString(path);
                         }
                         break;
                 }
-                
+
             }
             catch (UriFormatException ex)
             {
@@ -104,53 +102,6 @@ namespace Dali.Views
         {
             return (uri != null) ? uri.ToString() : "";
         }
-
-
-        //private static string html1 = System.IO.File.ReadAllText(@"c:\Desktop\HtmlTest.txt");
-
-        private static string html2 =
-            "<html><body>Label:<br/>" +
-            "</body></html>";
-
-        private static string html = 
-                        @"<html>
-                    <head>
-                    <meta http-equiv=""Content-Type"" content=""text/html; charset=UTF-8"" />
-                    </head>
-                      <div></div>
-                    <body>
-                    </body>
-                    </html>";
-
-        private const string htmlNote =
-                   "<html><head><script type='text/javascript'>" +
-                  "function doubleIt(incoming){ " +
-                  "  var intIncoming = parseInt(incoming, 10);" +
-                  "  var doubled = intIncoming * 2;" +
-                  "  document.body.style.fontSize= doubled.toString() + 'px';" +
-                  "  window.external.notify('The script says the doubled value is ' + doubled.toString());" +
-                  "};" +
-                  "</script></head><body><div id='myDiv'>I AM CONTENT</div></body></html>";
-
-        private const string htmlTasklist =
-                  "<html><head><script type='text/javascript'>" +
-                  "function doubleIt(incoming){ " +
-                  "  var intIncoming = parseInt(incoming, 10);" +
-                  "  var doubled = intIncoming * 2;" +
-                  "  document.body.style.fontSize= doubled.toString() + 'px';" +
-                  "  window.external.notify('The script says the doubled value is ' + doubled.toString());" +
-                  "};" +
-                  "</script></head><body><div id='myDiv'>I AM CONTENT</div></body></html>";
-
-        private const string htmlImage =
-                  "<html><head><script type='text/javascript'>" +
-                  "function doubleIt(incoming){ " +
-                  "  var intIncoming = parseInt(incoming, 10);" +
-                  "  var doubled = intIncoming * 2;" +
-                  "  document.body.style.fontSize= doubled.toString() + 'px';" +
-                  "  window.external.notify('The script says the doubled value is ' + doubled.toString());" +
-                  "};" +
-                  "</script></head><body><div id='myDiv'>I AM CONTENT</div></body></html>";
 
         /// <summary>
         /// Handle the event that indicates that WebView is starting a navigation.
