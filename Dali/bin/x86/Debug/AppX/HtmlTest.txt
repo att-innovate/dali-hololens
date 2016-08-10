@@ -21,6 +21,7 @@
         </script>
     </head>
     <body>
+	Label:<br/>
        numberToComplete : <input id="numberToComplete" type="text"/><br/>
        xAxis: <input id="xAxis" type="text"/><br/>
        yAxis: <input id="yAxis" type="text"/><br/>

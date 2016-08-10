@@ -47,12 +47,45 @@ namespace Dali.Views
                         //string path = File.ReadAllText(@"C:\User\Sarah Radzihovsky\Desktop\HtmlTest.txt");
                         // var path = Path.Combine(Directory.GetCurrentDirectory(), "HtmlTest.txt");
 
-                        StreamWriter file = new StreamWriter((@"C:\HtmlTest.txt");
-                        file.WriteLine(lines);
-                        string path = File.ReadAllText("HtmlTest.txt");
+                        var allLines = File.ReadAllLines("NoteHtml.txt").ToList();
+                        allLines.Insert(3, "This is a new line...");
+                        File.WriteAllLines("NoteHtml.txt", allLines.ToArray());
+
+                       // StreamWriter file = new StreamWriter((@"C:\HtmlTest.txt");
+                      //  file.WriteLine(lines);
+                        string path = File.ReadAllText("NoteHtml.txt");
+
+                       /* var sb = new StringBuilder();
+                        using (var sr = new StreamReader("inputFileName"))
+                        {
+                            string line;
+                            do
+                            {
+                                line = sr.ReadLine();
+                                sb.AppendLine(line);
+                            } while (!line.Contains("<body>"));
+
+                            sb.Append(selectedMark.content.);
+                            sb.Append(sr.ReadToEnd());
+                        }
+
+                        using (var sr = new StreamWriter("outputFileName"))
+                        {
+                            sr.Write(sb.ToString());
+                        }
 
 
-                        if (!File.Exists(path))
+                        // Example #4: Append new text to an existing file.
+                        // The using statement automatically flushes AND CLOSES the stream and calls 
+                        // IDisposable.Dispose on the stream object.
+                        using (System.IO.StreamWriter file =
+                            new System.IO.StreamWriter(@"C:\Users\Public\TestFolder\WriteLines2.txt", true))
+                        {
+                            file.WriteLine("Fourth line");
+                        }
+                        */
+
+            if (!File.Exists(path))
                         {
                             WebViewControl.NavigateToString(path);
                         }
