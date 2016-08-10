@@ -36,7 +36,7 @@ namespace Dali.Views
         [JsonProperty(PropertyName = "Type")]
         public string type { get; set; }
         [JsonProperty(PropertyName = "Content")]
-        public string[] content { get; set; }
+        public List<string> content { get; set; }
     }
 
         public sealed partial class SetNewMark : Page
@@ -59,7 +59,7 @@ namespace Dali.Views
                     mark.id = Globals.newId;
                     mark.label = newLabel;
                     mark.type = "";
-                    mark.content = new string[] {};
+                    mark.content = new List<string>();
 
                     Globals.selectedMark = mark;
 

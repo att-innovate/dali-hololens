@@ -33,82 +33,82 @@ namespace Dali.Views
             var selectedMark = Globals.selectedMark;
 
 
-           /* // Create a timer with a ten second interval.
-            aTimer = new System.Timers.Timer(10000);
+            /* // Create a timer with a ten second interval.
+             aTimer = new System.Timers.Timer(10000);
 
-            aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+             aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
 
-            // Set the Interval to 2 seconds (2000 milliseconds).
-            aTimer.Interval = 1000;
-            aTimer.Enabled = false;*/
-        
+             // Set the Interval to 2 seconds (2000 milliseconds).
+             aTimer.Interval = 1000;
+             aTimer.Enabled = false;*/
+
             //refresh(selectedMark);
 
-            try
-            {
-                //set label at top of UI
-                this.MarkName.Text = "Mark Label: " + selectedMark.label;
+            //set label at top of UI
+            this.MarkName.Text = "Mark Label: " + selectedMark.label;
 
-                //reset html
-                System.IO.File.WriteAllText("NoteHtml.txt", string.Empty);
-                List<string> lines = new List<string>
+            //reset html
+            System.IO.File.WriteAllText("NoteHtml.txt", string.Empty);
+            List<string> lines = new List<string>
                     { "<html>", "<body>", "Label:", "</body>", "</html>" };
 
-                switch (selectedMark.type)
-                {
-                    case "note":
-                        lines.Insert(3, selectedMark.label + "<br/>");
-                        lines.Insert(4, "Note: " + selectedMark.content[0]);
-                        File.WriteAllLines("NoteHtml.txt", lines.ToArray());
-                        string path = File.ReadAllText("NoteHtml.txt");
-
-                        if (!File.Exists(path))
-                        {
-                            WebViewControl.NavigateToString(path);
-                        }
-                        break;
-                    case "tasklist":
-                        lines.Insert(3, selectedMark.label + "<br/>");
-                        lines.Insert(4, "Tasklist <br/>");
-                        for (int i = 5; i < (selectedMark.content.Length + 4); i++)
-                        {
-                            lines.Insert(i, "<li>" + selectedMark.content[i - 5] + "</li>");
-
-                        }
-                        File.WriteAllLines("NoteHtml.txt", lines.ToArray());
-                        path = File.ReadAllText("NoteHtml.txt");
-
-                        if (!File.Exists(path))
-                        {
-                            WebViewControl.NavigateToString(path);
-                        }
-                        break;
-                    case "image":
-                        displayImage(selectedMark);
-                        break;
-                    case "url":
-                        Uri targetUri = new Uri(selectedMark.content[0]);
-                        WebViewControl.Navigate(targetUri);
-                        break;
-                    case "":
-                        break;
-                }
-
-            }
-            catch (UriFormatException ex)
+            switch (selectedMark.type)
             {
-                // Bad address
-                System.Diagnostics.Debug.WriteLine("Address is invalid, try again.");
+                case "note":
+                    lines.Insert(3, selectedMark.label + "<br/>");
+                    lines.Insert(4, "Note: " + selectedMark.content[0]);
+                    File.WriteAllLines("NoteHtml.txt", lines.ToArray());
+                    string path = File.ReadAllText("NoteHtml.txt");
+
+                    if (!File.Exists(path))
+                    {
+                        WebViewControl.NavigateToString(path);
+                    }
+                    break;
+                case "tasklist":
+                    lines.Insert(3, selectedMark.label + "<br/>");
+                    lines.Insert(4, "Tasklist <br/>");
+                    for (int i = 5; i < (selectedMark.content.Count + 5); i++)
+                    {
+                        lines.Insert(i, "<li>" + selectedMark.content[i - 5] + "</li>");
+
+                    }
+                    File.WriteAllLines("NoteHtml.txt", lines.ToArray());
+                    path = File.ReadAllText("NoteHtml.txt");
+
+                    if (!File.Exists(path))
+                    {
+                        WebViewControl.NavigateToString(path);
+                    }
+                    break;
+                case "image":
+                    displayImage(selectedMark);
+                    break;
+                case "url":
+                    try
+                    {
+                        Uri targetUri = new Uri(selectedMark.content[0]);
+                        System.Diagnostics.Debug.WriteLine("Address is invalid, try again.");
+                        WebViewControl.Navigate(targetUri);
+                    }
+                    catch (UriFormatException ex)
+                    {
+                        // Bad address
+                        System.Diagnostics.Debug.WriteLine("Address is invalid, try again.");
+                    }
+                    break;
+                case "":
+                    break;
             }
         }
 
-   /* public void OnTimedEvent(object source, ElapsedEventArgs e)
-    {
-        cookies = cookies + 1;
-    }
-    */
+        /* public void OnTimedEvent(object source, ElapsedEventArgs e)
+         {
+             cookies = cookies + 1;
+         }
+         */
 
-    private void displayImage(Mark selectedMark)
+        private void displayImage(Mark selectedMark)
         {
             switch (selectedMark.content[0])
             {
@@ -218,6 +218,11 @@ namespace Dali.Views
         private void WebViewControl_LoadCompleted(object sender, NavigationEventArgs e)
         {
 
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(OldMarks));
         }
     }
 }

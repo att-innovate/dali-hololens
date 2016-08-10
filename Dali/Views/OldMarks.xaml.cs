@@ -21,9 +21,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace Dali.Views
 {
     /// <summary>
@@ -64,6 +61,8 @@ namespace Dali.Views
 
                         string responseString = response.Content.ReadAsStringAsync().Result;
                         System.Diagnostics.Debug.WriteLine("GET SUCCESS:");
+                        System.Diagnostics.Debug.WriteLine(responseString);
+
 
                         getMarks(responseString);
 
@@ -90,8 +89,8 @@ namespace Dali.Views
             {
                 var newMark = result.ToObject<Mark>();
                 marks.Add(newMark);
-                Globals.marks = marks;
             }
+            Globals.marks = marks;
         }
 
 
@@ -114,7 +113,7 @@ namespace Dali.Views
             List<string> labels = new List<string>();
 
             var marks = Globals.marks;
-            for (int i = 1; i < marks.Count; i++)
+            for (int i = 0; i < marks.Count; i++)
             {
                 //check if this label has already been added to labels array 
                 if (labels.Contains(marks[i].label) == false)
@@ -157,7 +156,6 @@ namespace Dali.Views
             Globals.selectedMark = currentMark;
             // this.Frame.Navigate(typeof(ConfigureMark), mark);
             this.Frame.Navigate(typeof(webView));
-
         }
     }
 }

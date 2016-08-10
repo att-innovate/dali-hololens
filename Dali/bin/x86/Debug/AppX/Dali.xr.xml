@@ -88,6 +88,9 @@
       <RootProperty Name="Margin" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.WebView">
+      <RootProperty Name="Margin" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="VerticalAlignment" />
       <RootEvent Name="NavigationStarting" />
       <RootEvent Name="ContentLoading" />
       <RootEvent Name="DOMContentLoaded" />
