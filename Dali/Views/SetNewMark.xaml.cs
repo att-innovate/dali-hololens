@@ -61,6 +61,8 @@ namespace Dali.Views
                     mark.type = "";
                     mark.content = new string[] {};
 
+                    Globals.selectedMark = mark;
+
                     //serialize struct into a JSON String
                     var json = JsonConvert.SerializeObject(mark);
 
@@ -75,7 +77,6 @@ namespace Dali.Views
                     {
                         var responseContent = await httpResponse.Content.ReadAsStringAsync();
                         System.Diagnostics.Debug.WriteLine(responseContent);
-
                         System.Diagnostics.Debug.WriteLine("POST SUCCESS:");
                     }
                 }
@@ -132,6 +133,7 @@ namespace Dali.Views
         private void button_Click(object sender, RoutedEventArgs e)
         {
             PostRequest("http://10.250.3.24:8085", textBox.Text);
+            this.Frame.Navigate(typeof(webView));
         }
 
         private void textBox_TextChanged(object sender, TextChangedEventArgs e)

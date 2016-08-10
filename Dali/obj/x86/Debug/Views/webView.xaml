@@ -19,25 +19,18 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock x:ConnectionId='4' x:Name="MarkName" Text="Mark Label:" Margin="0,0,10,0" Grid.Column="0"/>
+                <TextBlock x:ConnectionId='2' x:Name="MarkName" Text="Mark Label:" Margin="0,0,10,0" Grid.Column="0"/>
             </Grid>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
             </StackPanel>
         </StackPanel>
 
         <Grid Grid.Row="1" BorderBrush="#FF707070" BorderThickness="1" Margin="0,10,0,0">
-            <WebView x:ConnectionId='3' x:Name="WebViewControl"
+            <WebView x:ConnectionId='1' x:Name="WebViewControl"
                                                                                                                           
                                                                                                                                                 
-                                                                             />
+                                                                                                                          />
         </Grid>
-
-        <ScrollViewer x:ConnectionId='1' x:Name="logScroller" Grid.Row="2"
-                      BorderBrush="#FF707070" BorderThickness="1"
-                      VerticalScrollBarVisibility="Auto" Margin="0,10,0,0"
-                      Height="50">
-            <TextBlock x:ConnectionId='2' x:Name="logResults" TextWrapping="Wrap"/>
-        </ScrollViewer>
     </Grid>
 </Page>
 

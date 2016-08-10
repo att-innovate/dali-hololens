@@ -29,14 +29,7 @@
             <WebView x:Name="WebViewControl"
                      NavigationStarting="WebViewControl_NavigationStarting" ContentLoading="WebViewControl_ContentLoading"
                      DOMContentLoaded="WebViewControl_DOMContentLoaded" UnviewableContentIdentified="WebViewControl_UnviewableContentIdentified"
-                     NavigationCompleted="WebViewControl_NavigationCompleted"/>
+                     NavigationCompleted="WebViewControl_NavigationCompleted" LoadCompleted="WebViewControl_LoadCompleted"/>
         </Grid>
-
-        <ScrollViewer x:Name="logScroller" Grid.Row="2"
-                      BorderBrush="#FF707070" BorderThickness="1"
-                      VerticalScrollBarVisibility="Auto" Margin="0,10,0,0"
-                      Height="50">
-            <TextBlock x:Name="logResults" TextWrapping="Wrap"/>
-        </ScrollViewer>
     </Grid>
 </Page>

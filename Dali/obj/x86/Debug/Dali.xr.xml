@@ -87,20 +87,13 @@
       <RootProperty Name="Orientation" />
       <RootProperty Name="Margin" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.ScrollViewer">
-      <RootProperty Name="BorderBrush" />
-      <RootProperty Name="BorderThickness" />
-      <RootProperty Name="VerticalScrollBarVisibility" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="Content" />
-    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.WebView">
       <RootEvent Name="NavigationStarting" />
       <RootEvent Name="ContentLoading" />
       <RootEvent Name="DOMContentLoaded" />
       <RootEvent Name="UnviewableContentIdentified" />
       <RootEvent Name="NavigationCompleted" />
+      <RootEvent Name="LoadCompleted" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
       <RootProperty Name="Width" />

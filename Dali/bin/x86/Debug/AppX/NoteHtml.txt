@@ -1,6 +1,0 @@
-<html>
-<body>
-Label:
-This is a new line...
-</body>
-</html>

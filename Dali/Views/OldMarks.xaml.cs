@@ -47,7 +47,7 @@ namespace Dali.Views
             GetRequest("http://10.250.3.24:8085");
         }
 
-        async void GetRequest(string url)
+        public async void GetRequest(string url)
         {
             try
             {
@@ -91,11 +91,6 @@ namespace Dali.Views
                 var newMark = result.ToObject<Mark>();
                 marks.Add(newMark);
                 Globals.marks = marks;
-                
-                for (int i = 0; i < marks.Count; i++)
-                {
-                    System.Diagnostics.Debug.WriteLine(marks[i].label);  
-                }
             }
         }
 
@@ -161,7 +156,7 @@ namespace Dali.Views
             }
             Globals.selectedMark = currentMark;
             // this.Frame.Navigate(typeof(ConfigureMark), mark);
-            this.Frame.Navigate(typeof(webView));//, currentMark);
+            this.Frame.Navigate(typeof(webView));
 
         }
     }

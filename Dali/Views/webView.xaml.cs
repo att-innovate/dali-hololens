@@ -12,6 +12,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using System.Threading;
+using System.Threading;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,13 +24,32 @@ namespace Dali.Views
     /// </summary>
     public sealed partial class webView : Page
     {
+        private static Timer timer;
+
         public webView()
         {
             this.InitializeComponent();
+
+            var selectedMark = Globals.selectedMark;
+
+
+           /* // Create a timer with a ten second interval.
+            aTimer = new System.Timers.Timer(10000);
+
+            aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+
+            // Set the Interval to 2 seconds (2000 milliseconds).
+            aTimer.Interval = 1000;
+            aTimer.Enabled = false;*/
+        
+            //refresh(selectedMark);
+
             try
             {
-                var selectedMark = Globals.selectedMark;
+                //set label at top of UI
+                this.MarkName.Text = "Mark Label: " + selectedMark.label;
 
+                //reset html
                 System.IO.File.WriteAllText("NoteHtml.txt", string.Empty);
                 List<string> lines = new List<string>
                     { "<html>", "<body>", "Label:", "</body>", "</html>" };
@@ -36,7 +57,7 @@ namespace Dali.Views
                 switch (selectedMark.type)
                 {
                     case "note":
-                        lines.Insert(3, selectedMark.label);
+                        lines.Insert(3, selectedMark.label + "<br/>");
                         lines.Insert(4, "Note: " + selectedMark.content[0]);
                         File.WriteAllLines("NoteHtml.txt", lines.ToArray());
                         string path = File.ReadAllText("NoteHtml.txt");
@@ -47,11 +68,11 @@ namespace Dali.Views
                         }
                         break;
                     case "tasklist":
-                        lines.Insert(3, selectedMark.label);
+                        lines.Insert(3, selectedMark.label + "<br/>");
                         lines.Insert(4, "Tasklist <br/>");
                         for (int i = 5; i < (selectedMark.content.Length + 4); i++)
                         {
-                            lines.Insert(i, selectedMark.content[i - 5]);
+                            lines.Insert(i, "<li>" + selectedMark.content[i - 5] + "</li>");
 
                         }
                         File.WriteAllLines("NoteHtml.txt", lines.ToArray());
@@ -63,30 +84,13 @@ namespace Dali.Views
                         }
                         break;
                     case "image":
-                        lines.Insert(3, selectedMark.label);
-                        lines.Insert(4, "< h2 >" + selectedMark.content[0] + "</ h2 >");
-                        lines.Insert(5, "<img src='pic_mountain.jpg' alt='Mountain View' style='width: 304px; height: 228px; '>");
-                        File.WriteAllLines("NoteHtml.txt", lines.ToArray());
-                        path = File.ReadAllText("NoteHtml.txt");
-
-                        if (!File.Exists(path))
-                        {
-                            WebViewControl.NavigateToString(path);
-                        }
+                        displayImage(selectedMark);
                         break;
                     case "url":
                         Uri targetUri = new Uri(selectedMark.content[0]);
                         WebViewControl.Navigate(targetUri);
                         break;
                     case "":
-                        lines.Insert(3, "This is a new line...");
-                        File.WriteAllLines("NoteHtml.txt", lines.ToArray());
-                        path = File.ReadAllText("NoteHtml.txt");
-
-                        if (!File.Exists(path))
-                        {
-                            WebViewControl.NavigateToString(path);
-                        }
                         break;
                 }
 
@@ -94,11 +98,68 @@ namespace Dali.Views
             catch (UriFormatException ex)
             {
                 // Bad address
-                AppendLog($"Address is invalid, try again. Error: {ex.Message}.");
+                System.Diagnostics.Debug.WriteLine("Address is invalid, try again.");
             }
         }
 
-        static string UriToString(Uri uri)
+   /* public void OnTimedEvent(object source, ElapsedEventArgs e)
+    {
+        cookies = cookies + 1;
+    }
+    */
+
+    private void displayImage(Mark selectedMark)
+        {
+            switch (selectedMark.content[0])
+            {
+                case "Up Arrow":
+                    Uri imageUri = new Uri("https://upload.wikimedia.org/wikipedia/commons/6/61/Black_Up_Arrow.png");
+                    WebViewControl.Navigate(imageUri);
+                    break;
+                case "Down Arrow":
+                    imageUri = new Uri("https://upload.wikimedia.org/wikipedia/en/e/e0/Black_Down_Arrow.png");
+                    WebViewControl.Navigate(imageUri);
+                    break;
+                case "Danger":
+                    imageUri = new Uri("https://lh6.ggpht.com/JWk0waKYxAVbuIavYsRimLK3859m_s-MWJpSXkoQ8ejLpPvge_iF_xHiomfMAgYb1oF-=w300");
+                    WebViewControl.Navigate(imageUri);
+                    break;
+                case "Don't Touch":
+                    imageUri = new Uri("http://www.alphaecological.com/wp-content/uploads/2014/10/Do-Not-Touch-300x265.jpg");
+                    WebViewControl.Navigate(imageUri);
+                    break;
+            }
+        }
+
+        private void refresh(Mark selectedMark)
+        {
+            OldMarks newClass = new OldMarks();
+            newClass.GetRequest("http://10.250.3.24:8085");
+
+            var newMarks = Globals.marks;
+            for (int i = 0; i < newMarks.Count; i++)
+            {
+                if (newMarks[i].label == selectedMark.label)
+                {
+                    selectedMark = newMarks[i];
+                }
+            }
+        }
+        /* lines.Insert(3, selectedMark.label);
+                         lines.Insert(4, "<h2>" + selectedMark.content[0] + "</h2>");
+ //                        lines.Insert(4, "<h2>Danger</h2>");
+
+                         lines.Insert(5, "<img src='Danger.jpg' alt='Danger' style='width: 210px; height: 240px; '>");
+                         File.WriteAllLines("NoteHtml.txt", lines.ToArray());
+                         path = File.ReadAllText("NoteHtml.txt");
+
+                         if (!File.Exists(path))
+                         {
+                             WebViewControl.NavigateToString(path);
+                         }*/
+
+
+        private static string UriToString(Uri uri)
         {
             return (uri != null) ? uri.ToString() : "";
         }
@@ -111,7 +172,6 @@ namespace Dali.Views
         void WebViewControl_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
         {
             string url = UriToString(args.Uri);
-            AppendLog($"Starting navigation to: \"{url}\".");
         }
 
         /// <summary>
@@ -122,9 +182,7 @@ namespace Dali.Views
         /// <param name="args"></param>
         void WebViewControl_UnviewableContentIdentified(WebView sender, WebViewUnviewableContentIdentifiedEventArgs args)
         {
-            AppendLog($"Content for \"{UriToString(args.Uri)}\" cannot be loaded into webview.");
-            // We throw away the request. See the "Unviewable content" scenario for other
-            // ways of handling the event.
+
         }
 
         /// <summary>
@@ -134,9 +192,8 @@ namespace Dali.Views
         /// <param name="args"></param>
         void WebViewControl_ContentLoading(WebView sender, WebViewContentLoadingEventArgs args)
         {
-            AppendLog($"Loading content for \"{UriToString(args.Uri)}\".");
-        }
 
+        }
 
         /// <summary>
         /// Handle the event that indicates that the WebView content is fully loaded.
@@ -146,7 +203,6 @@ namespace Dali.Views
         /// <param name="args"></param>
         void WebViewControl_DOMContentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args)
         {
-            AppendLog($"Content for \"{UriToString(args.Uri)}\" has finished loading.");
         }
 
         /// <summary>
@@ -156,23 +212,12 @@ namespace Dali.Views
         /// <param name="args"></param>
         void WebViewControl_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
         {
-            if (args.IsSuccess)
-            {
-                AppendLog($"Navigation to \"{UriToString(args.Uri)}\" completed successfully.");
-            }
-            else
-            {
-                AppendLog($"Navigation to: \"{UriToString(args.Uri)}\" failed with error {args.WebErrorStatus}.");
-            }
+
         }
 
-        /// <summary>
-        /// Helper for logging
-        /// </summary>
-        /// <param name="logEntry"></param>
-        void AppendLog(string logEntry)
+        private void WebViewControl_LoadCompleted(object sender, NavigationEventArgs e)
         {
-            logScroller.ChangeView(0, logScroller.ScrollableHeight, null);
+
         }
     }
 }
