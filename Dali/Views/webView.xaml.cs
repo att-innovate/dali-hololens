@@ -43,7 +43,22 @@ namespace Dali.Views
                         Uri targetUri = new Uri(selectedMark.content[0]);
                         WebViewControl.Navigate(targetUri);
                         break;
-                }         
+                    case "":
+                        //string path = File.ReadAllText(@"C:\User\Sarah Radzihovsky\Desktop\HtmlTest.txt");
+                        // var path = Path.Combine(Directory.GetCurrentDirectory(), "HtmlTest.txt");
+
+                        StreamWriter file = new StreamWriter((@"C:\HtmlTest.txt");
+                        file.WriteLine(lines);
+                        string path = File.ReadAllText("HtmlTest.txt");
+
+
+                        if (!File.Exists(path))
+                        {
+                            WebViewControl.NavigateToString(path);
+                        }
+                        break;
+                }
+                
             }
             catch (UriFormatException ex)
             {
@@ -56,6 +71,23 @@ namespace Dali.Views
         {
             return (uri != null) ? uri.ToString() : "";
         }
+
+
+        //private static string html1 = System.IO.File.ReadAllText(@"c:\Desktop\HtmlTest.txt");
+
+        private static string html2 =
+            "<html><body>Label:<br/>" +
+            "</body></html>";
+
+        private static string html = 
+                        @"<html>
+                    <head>
+                    <meta http-equiv=""Content-Type"" content=""text/html; charset=UTF-8"" />
+                    </head>
+                      <div></div>
+                    <body>
+                    </body>
+                    </html>";
 
         private const string htmlNote =
                    "<html><head><script type='text/javascript'>" +

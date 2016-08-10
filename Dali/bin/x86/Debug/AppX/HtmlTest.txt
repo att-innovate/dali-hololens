@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Testing Variable Capturing</title>
+        <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+        <script>
+        var numberToComplete = 0;
+            var xAxis = 0;
+            var yAxis = 0;
+            var populationAmount = 0; 
+
+            function setValues() {
+                numberToComplete = $("#numberToComplete").val();
+                xAxis = $("#xAxis").val();
+                yAxis = $("#yAxis").val();
+                populationAmount = $("#populationAmount").val();
+            }
+            function getValues() {
+                $("#result").text("numberToComplete: " + numberToComplete + " | xAxis: " + xAxis + " | yAxis: " + yAxis + " | populationAmount: " + populationAmount);
+            }
+        </script>
+    </head>
+    <body>
+       numberToComplete : <input id="numberToComplete" type="text"/><br/>
+       xAxis: <input id="xAxis" type="text"/><br/>
+       yAxis: <input id="yAxis" type="text"/><br/>
+       populationAmount: <input id="populationAmount" type="text"/><br/>
+       <input type="button" onclick="setValues();" value="Set Values" />
+       <input type="button" onclick="getValues();" value="Get Values" /><br/>
+       <div id="result"></div>
+    </body>
+</html>

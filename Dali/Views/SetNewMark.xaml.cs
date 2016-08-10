@@ -63,7 +63,6 @@ namespace Dali.Views
 
                     //serialize struct into a JSON String
                     var json = JsonConvert.SerializeObject(mark);
-                    System.Diagnostics.Debug.WriteLine("JSON", json);
 
                     // Wrap our JSON inside a StringContent which then can be used by the HttpClient class
                     var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
