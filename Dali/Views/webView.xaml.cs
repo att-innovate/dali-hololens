@@ -13,6 +13,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Threading;
+using Windows.UI.Core;
+
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -25,14 +27,12 @@ namespace Dali.Views
     {
         private static Timer timer;
 
+
         public webView()
         {
             this.InitializeComponent();
 
             var selectedMark = Globals.selectedMark;
-
-            //set label at top of UI
-            this.MarkName.Text = "Mark Label: " + selectedMark.label;
 
             //reset html
             System.IO.File.WriteAllText("NoteHtml.txt", string.Empty);
@@ -90,24 +90,13 @@ namespace Dali.Views
 
             // Create an AutoResetEvent to signal the timeout threshold in the
             // timer callback has been reached.
-            var autoEvent = new AutoResetEvent(false);
+            // var autoEvent = new AutoResetEvent(false);
 
-            var statusChecker = new StatusChecker(10);
+            var statusChecker = new StatusChecker();
+            timer = new Timer(statusChecker.CheckStatus,
+                                       null, 1000, 500);
 
-            // Create a timer that invokes CheckStatus after one second, 
-            // and every 1/4 second thereafter.
-
-            var timer = new Timer(statusChecker.CheckStatus,
-                                       autoEvent, 1000, 500);
-            while (true)
-            {
-                autoEvent.WaitOne();
-                refresh();
-                System.Diagnostics.Debug.WriteLine("refresh");
-            }
-
-            timer.Dispose();
-            System.Diagnostics.Debug.WriteLine("\nDestroying timer.");
+            //timer.Dispose();
         }
 
         private void displayImage(Mark selectedMark)
@@ -136,33 +125,66 @@ namespace Dali.Views
         class StatusChecker
         {
             private int invokeCount;
-            private int maxCount;
+            public CoreDispatcher Dispatcher { get; set; }
 
-            public StatusChecker(int count)
+            public StatusChecker()
             {
                 invokeCount = 0;
-                maxCount = count;
             }
 
+
             // This method is called by the timer delegate.
-            public void CheckStatus(Object stateInfo)
+            public async void CheckStatus(Object stateInfo)
             {
-                AutoResetEvent autoEvent = (AutoResetEvent)stateInfo;
                 System.Diagnostics.Debug.WriteLine("{0} Checking status {1,2}.",
                     DateTime.Now.ToString("h:mm:ss.fff"),
                     (++invokeCount).ToString());
 
-                if (invokeCount == maxCount)
+
+                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                () =>
                 {
-                    // Reset the counter and signal the waiting thread.
-                    invokeCount = 0;
-                    autoEvent.Set();
-                }
+                    WebView newView = new WebView();
+                    newView.Refresh();
+                        // refresh();
+                        System.Diagnostics.Debug.WriteLine("refresh");
+                });
+
+
+
+
+                /* if (invokeCount == maxCount)
+                 {
+
+                     // Reset the counter and signal the waiting thread.
+                     invokeCount = 0;
+                     autoEvent.Set();
+                 }*/
             }
         }
 
-        private static void TimerCallback(Object state)
+
+        /*  public bool Reload(object param)
+          {
+              System.Diagnostics.Debug.WriteLine("reloaded");
+
+              Type type = this.Frame.CurrentSourcePageType;
+              if (this.Frame.BackStack.Any())
+              {
+                  type = this.Frame.BackStack.Last().SourcePageType;
+                  param = this.Frame.BackStack.Last().Parameter;
+                  this.Frame.Refresh();
+              }
+              try { return this.Frame.Navigate(type, param); }
+              finally
+              {
+                  this.Frame.BackStack.Remove(this.Frame.BackStack.Last());
+              }
+          }*/
+
+        public async void refresh()
         {
+
             OldMarks newClass = new OldMarks();
             newClass.GetRequest("http://10.250.3.24:8085");
 
@@ -175,37 +197,8 @@ namespace Dali.Views
                     selectedMark = newMarks[i];
                 }
             }
-            System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString("h:mm:ss"));
+
         }
-
-        public static void refresh()
-        {
-            OldMarks newClass = new OldMarks();
-            newClass.GetRequest("http://10.250.3.24:8085");
-
-            var selectedMark = Globals.selectedMark;
-            var newMarks = Globals.marks;
-            for (int i = 0; i < newMarks.Count; i++)
-            {
-                if (newMarks[i].label == selectedMark.label)
-                {
-                    selectedMark = newMarks[i];
-                }
-            }
-        }
-        /* lines.Insert(3, selectedMark.label);
-                         lines.Insert(4, "<h2>" + selectedMark.content[0] + "</h2>");
- //                        lines.Insert(4, "<h2>Danger</h2>");
-
-                         lines.Insert(5, "<img src='Danger.jpg' alt='Danger' style='width: 210px; height: 240px; '>");
-                         File.WriteAllLines("NoteHtml.txt", lines.ToArray());
-                         path = File.ReadAllText("NoteHtml.txt");
-
-                         if (!File.Exists(path))
-                         {
-                             WebViewControl.NavigateToString(path);
-                         }*/
-
 
         private static string UriToString(Uri uri)
         {

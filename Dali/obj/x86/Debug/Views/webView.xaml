@@ -19,7 +19,6 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock x:ConnectionId='3' x:Name="MarkName" Text="Mark Label:" Margin="0,0,10,0" Grid.Column="0"/>
             </Grid>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
             </StackPanel>
