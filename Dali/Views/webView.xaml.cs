@@ -13,7 +13,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Threading;
-using System.Threading;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -31,18 +30,6 @@ namespace Dali.Views
             this.InitializeComponent();
 
             var selectedMark = Globals.selectedMark;
-
-
-            /* // Create a timer with a ten second interval.
-             aTimer = new System.Timers.Timer(10000);
-
-             aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-
-             // Set the Interval to 2 seconds (2000 milliseconds).
-             aTimer.Interval = 1000;
-             aTimer.Enabled = false;*/
-
-            //refresh(selectedMark);
 
             //set label at top of UI
             this.MarkName.Text = "Mark Label: " + selectedMark.label;
@@ -100,13 +87,28 @@ namespace Dali.Views
                 case "":
                     break;
             }
-        }
 
-        /* public void OnTimedEvent(object source, ElapsedEventArgs e)
-         {
-             cookies = cookies + 1;
-         }
-         */
+            // Create an AutoResetEvent to signal the timeout threshold in the
+            // timer callback has been reached.
+            var autoEvent = new AutoResetEvent(false);
+
+            var statusChecker = new StatusChecker(10);
+
+            // Create a timer that invokes CheckStatus after one second, 
+            // and every 1/4 second thereafter.
+
+            var timer = new Timer(statusChecker.CheckStatus,
+                                       autoEvent, 1000, 500);
+            while (true)
+            {
+                autoEvent.WaitOne();
+                refresh();
+                System.Diagnostics.Debug.WriteLine("refresh");
+            }
+
+            timer.Dispose();
+            System.Diagnostics.Debug.WriteLine("\nDestroying timer.");
+        }
 
         private void displayImage(Mark selectedMark)
         {
@@ -131,11 +133,57 @@ namespace Dali.Views
             }
         }
 
-        private void refresh(Mark selectedMark)
+        class StatusChecker
+        {
+            private int invokeCount;
+            private int maxCount;
+
+            public StatusChecker(int count)
+            {
+                invokeCount = 0;
+                maxCount = count;
+            }
+
+            // This method is called by the timer delegate.
+            public void CheckStatus(Object stateInfo)
+            {
+                AutoResetEvent autoEvent = (AutoResetEvent)stateInfo;
+                System.Diagnostics.Debug.WriteLine("{0} Checking status {1,2}.",
+                    DateTime.Now.ToString("h:mm:ss.fff"),
+                    (++invokeCount).ToString());
+
+                if (invokeCount == maxCount)
+                {
+                    // Reset the counter and signal the waiting thread.
+                    invokeCount = 0;
+                    autoEvent.Set();
+                }
+            }
+        }
+
+        private static void TimerCallback(Object state)
         {
             OldMarks newClass = new OldMarks();
             newClass.GetRequest("http://10.250.3.24:8085");
 
+            var selectedMark = Globals.selectedMark;
+            var newMarks = Globals.marks;
+            for (int i = 0; i < newMarks.Count; i++)
+            {
+                if (newMarks[i].label == selectedMark.label)
+                {
+                    selectedMark = newMarks[i];
+                }
+            }
+            System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString("h:mm:ss"));
+        }
+
+        public static void refresh()
+        {
+            OldMarks newClass = new OldMarks();
+            newClass.GetRequest("http://10.250.3.24:8085");
+
+            var selectedMark = Globals.selectedMark;
             var newMarks = Globals.marks;
             for (int i = 0; i < newMarks.Count; i++)
             {

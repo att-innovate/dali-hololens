@@ -19,18 +19,19 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock x:Name="MarkName" Text="Mark Label:" Margin="0,0,10,0" Grid.Column="0"/>
+                <TextBlock x:ConnectionId='3' x:Name="MarkName" Text="Mark Label:" Margin="0,0,10,0" Grid.Column="0"/>
             </Grid>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
             </StackPanel>
         </StackPanel>
 
         <Grid Grid.Row="1" BorderBrush="#FF707070" BorderThickness="1" Margin="24,30,24,56">
-            <WebView x:Name="WebViewControl"
-                     NavigationStarting="WebViewControl_NavigationStarting" ContentLoading="WebViewControl_ContentLoading"
-                     DOMContentLoaded="WebViewControl_DOMContentLoaded" UnviewableContentIdentified="WebViewControl_UnviewableContentIdentified"
-                     NavigationCompleted="WebViewControl_NavigationCompleted" LoadCompleted="WebViewControl_LoadCompleted" Margin="9,9,9,0" Height="611" VerticalAlignment="Top"/>
+            <WebView x:ConnectionId='2' x:Name="WebViewControl"
+                                                                                                                          
+                                                                                                                                                
+                                                                                                                           Margin="9,9,9,0" Height="611" VerticalAlignment="Top"/>
         </Grid>
-        <Button x:Name="button" Content="Back to Marks" HorizontalAlignment="Center" Margin="12,674,305,0" VerticalAlignment="Center" Width="115" Click="button_Click" Grid.Row="1"/>
+        <Button x:ConnectionId='1' x:Name="button" Content="Back to Marks" HorizontalAlignment="Center" Margin="12,674,305,0" VerticalAlignment="Center" Width="115"                      Grid.Row="1"/>
     </Grid>
 </Page>
+
