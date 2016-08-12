@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<script>
+function getId() {
+    var urlParamString = location.search.split("id=");
+    if (urlParamString.length <= 1)
+        return "";
+    else {
+        return urlParamString[1];
+    }
+}
+
+function requestNote(id) {
+    var url = "http://10.250.3.24:8085/mark/"+id;
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (request.readyState === 4) {
+            if (request.status === 202) {
+                console.log(request.responseText);
+                var note = JSON.parse(request.responseText);
+                document.getElementById("label").innerHTML = note.mark.Label;
+                document.getElementById("note").innerHTML = note.mark.Content[0];
+            } else {
+                alert("Communication Error");
+            }
+        }
+    };
+    request.open("GET", url , true);
+    request.send();
+}
+
+function loadNote() {
+    var id = getId();
+    console.log(id);
+
+    var note = requestNote(id)
+}
+</script>
+
+<html>
+<body onload="loadNote()">
+
+<h3>Note</h3>
+
+<p id="label"></p>
+<p id="note"></p>
+
+</body>
+</html>

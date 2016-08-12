@@ -36,89 +36,18 @@ namespace Dali.Views
         {
             this.InitializeComponent();
 
-            var selectedMark = Globals.selectedMark;
+            string path = File.ReadAllText("image.html");
 
-            //reset html
-            System.IO.File.WriteAllText("NoteHtml.txt", string.Empty);
-            List<string> lines = new List<string>
-                    { "<html>", "<body>", "Label:", "</body>", "</html>" };
-
-            switch (selectedMark.type)
+            if (!File.Exists(path))
             {
-                case "note":
-                    lines.Insert(3, selectedMark.label + "<br/>");
-                    lines.Insert(4, "Note: " + selectedMark.content[0]);
-                    File.WriteAllLines("NoteHtml.txt", lines.ToArray());
-                    string path = File.ReadAllText("NoteHtml.txt");
-
-                    if (!File.Exists(path))
-                    {
-                        WebViewControl.NavigateToString(path);
-                    }
-                    break;
-                case "tasklist":
-                    lines.Insert(3, selectedMark.label + "<br/>");
-                    lines.Insert(4, "Tasklist <br/>");
-                    for (int i = 5; i < (selectedMark.content.Count + 5); i++)
-                    {
-                        lines.Insert(i, "<li>" + selectedMark.content[i - 5] + "</li>");
-
-                    }
-                    File.WriteAllLines("NoteHtml.txt", lines.ToArray());
-                    path = File.ReadAllText("NoteHtml.txt");
-
-                    if (!File.Exists(path))
-                    {
-                        WebViewControl.NavigateToString(path);
-                    }
-                    break;
-                case "image":
-                    displayImage(selectedMark);
-                    break;
-                case "url":
-                    try
-                    {
-                        Uri targetUri = new Uri(selectedMark.content[0]);
-                        System.Diagnostics.Debug.WriteLine("Address is invalid, try again.");
-                        WebViewControl.Navigate(targetUri);
-                    }
-                    catch (UriFormatException ex)
-                    {
-                        // Bad address
-                        System.Diagnostics.Debug.WriteLine("Address is invalid, try again.");
-                    }
-                    break;
-                case "":
-                    break;
+                WebViewControl.NavigateToString(path);
             }
+
             var statusChecker = new StatusChecker();
             timer = new Timer(statusChecker.CheckStatus,
                                        null, 1000, 500);
 
             //timer.Dispose();
-        }
-
-        private void displayImage(Mark selectedMark)
-        {
-            switch (selectedMark.content[0])
-            {
-                case "Up Arrow":
-                    Uri imageUri = new Uri("https://upload.wikimedia.org/wikipedia/commons/6/61/Black_Up_Arrow.png");
-                    WebViewControl.Navigate(imageUri);
-                    break;
-                case "Down Arrow":
-                    imageUri = new Uri("https://upload.wikimedia.org/wikipedia/en/e/e0/Black_Down_Arrow.png");
-                    WebViewControl.Navigate(imageUri);
-                    break;
-                case "Danger":
-                    imageUri = new Uri("https://lh6.ggpht.com/JWk0waKYxAVbuIavYsRimLK3859m_s-MWJpSXkoQ8ejLpPvge_iF_xHiomfMAgYb1oF-=w300");
-                    WebViewControl.Navigate(imageUri);
-                    break;
-                case "Don't Touch":
-                    imageUri = new Uri("http://www.alphaecological.com/wp-content/uploads/2014/10/Do-Not-Touch-300x265.jpg");
-                    WebViewControl.Navigate(imageUri);
-                    break;
-            }
         }
 
         class StatusChecker
