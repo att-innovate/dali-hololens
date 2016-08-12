@@ -19,8 +19,8 @@ function requestNote(id) {
             if (request.status === 202) {
                 console.log(request.responseText);
                 var note = JSON.parse(request.responseText);
-                document.getElementById("label").innerHTML = note.mark.Label;
-                document.getElementById("note").innerHTML = note.mark.Content[0];
+                document.getElementById("label").innerHTML = note.Label;
+                document.getElementById("note").innerHTML = note.Content[0];
             } else {
                 alert("Communication Error");
             }

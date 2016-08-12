@@ -36,11 +36,49 @@ namespace Dali.Views
         {
             this.InitializeComponent();
 
-            string path = File.ReadAllText("image.html");
+            var selectedMark = Globals.selectedMark;
 
-            if (!File.Exists(path))
+            switch (selectedMark.type)
             {
-                WebViewControl.NavigateToString(path);
+                case "note":
+                    var path = "Note.html?id=" + selectedMark.id;
+
+                    if (!File.Exists(path))
+                    {
+                        WebViewControl.Navigate(new Uri("ms-appx-web:///" + path));
+                    }
+                    break;
+                case "tasklist":
+                    path = "Tasklist.html?id=" + selectedMark.id;
+
+                    if (!File.Exists(path))
+                    {
+                        WebViewControl.Navigate(new Uri("ms-appx-web:///" + path));
+                    }
+                    break;
+                case "image":
+                    path = "Image.html?id=" + selectedMark.id;
+
+                    if (!File.Exists(path))
+                    {
+                        WebViewControl.Navigate(new Uri("ms-appx-web:///" + path));
+                    }
+                    break;
+                case "url":
+                    try
+                    {
+                        Uri targetUri = new Uri(selectedMark.content[0]);
+                        System.Diagnostics.Debug.WriteLine("Address is invalid, try again.");
+                        WebViewControl.Navigate(targetUri);
+                    }
+                    catch (UriFormatException ex)
+                    {
+                        // Bad address
+                        System.Diagnostics.Debug.WriteLine("Address is invalid, try again.");
+                    }
+                    break;
+                case "":
+                    break;
             }
 
             var statusChecker = new StatusChecker();
@@ -63,49 +101,13 @@ namespace Dali.Views
             // This method is called by the timer delegate.
             public async void CheckStatus(Object stateInfo)
             {
-                System.Diagnostics.Debug.WriteLine("{0} Checking status {1,2}.",
-                    DateTime.Now.ToString("h:mm:ss.fff"),
-                    (++invokeCount).ToString());
 
                 await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                 () =>
                 {
-
-                    GetRequest("http://10.250.3.24:8085", Globals.selectedMark.id);
                     WebView newView = new WebView();
                     newView.Refresh();
-                    System.Diagnostics.Debug.WriteLine("refresh");
                 });
-            }
-
-            public async void GetRequest(string url, string id)
-            {
-                try
-                {
-                    using (HttpClient client = new HttpClient())
-                    {
-                        client.BaseAddress = new Uri(url);
-                        client.DefaultRequestHeaders
-                                    .Accept
-                                     .Add(new MediaTypeWithQualityHeaderValue("application/json"));//ACCEPT header
-                        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "relativeAddress");
-
-                        using (var response = client.GetAsync("/mark/" + id).Result)
-                        {
-
-                            string responseString = response.Content.ReadAsStringAsync().Result;
-                            System.Diagnostics.Debug.WriteLine("GET SUCCESS:");
-                            System.Diagnostics.Debug.WriteLine(responseString);
-
-
-                        }
-                    }
-                }
-                catch (Exception exception)
-                {
-                    System.Diagnostics.Debug.WriteLine("CAUGHT EXCEPTION:");
-                    System.Diagnostics.Debug.WriteLine(exception);
-                }
             }
         }
 

@@ -10,7 +10,7 @@ function getId() {
     }
 }
 
-function requestImage(id) {
+function requestTasklist(id) {
     var url = "http://10.250.3.24:8085/mark/"+id;
 
     var request = new XMLHttpRequest();
@@ -18,10 +18,14 @@ function requestImage(id) {
         if (request.readyState === 4) {
             if (request.status === 202) {
                 console.log(request.responseText);
-                var note = JSON.parse(request.responseText);
-                document.getElementById("label").innerHTML = note.Label;
-                document.getElementById("image").innerHTML = note.Content[0];
-		document.getElementById("myImage").src = note.Content[0] +".jpg"
+                var tasklist = JSON.parse(request.responseText);
+		var text = "";
+                document.getElementById("label").innerHTML = tasklist.Label;
+		for (i in tasklist.Content) {
+   			 text += "<li>" + tasklist.Content[i] + "</li>";
+		}
+		console.log(text)
+                document.getElementById("tasklist").innerHTML = text
             } else {
                 alert("Communication Error");
             }
@@ -31,21 +35,21 @@ function requestImage(id) {
     request.send();
 }
 
-function loadImage() {
+function loadTasklist() {
     var id = getId();
     console.log(id);
 
-    var image = requestImage(id)
+    var tasklist = requestTasklist(id)
 }
 </script>
 
 <html>
-<body onload="loadImage()">
+<body onload="loadTasklist()">
 
-<h3><p id="image"></p></h3>
+<h3>Tasklist</h3>
+
 <p id="label"></p>
-
-<img id="myImage" src= "" alt=image style="width:304px;height:228px;">
+<p id="tasklist"></p>
 
 </body>
 </html>

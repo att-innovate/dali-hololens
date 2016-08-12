@@ -1,8 +1,6 @@
 App.xbf
 Themes\Generic.xbf
-Views\ConfigureMark.xbf
 Views\MainPage.xbf
-Views\MasterDetailPage.xbf
 Views\OldMarks.xbf
 Views\OldNewMenu.xbf
 Views\SetNewMark.xbf

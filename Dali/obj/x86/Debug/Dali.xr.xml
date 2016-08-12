@@ -46,7 +46,6 @@
       <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Dali.Views.SetNewMark" />
-    <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.ThemeResourceExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.TextBlock">
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Margin" />
@@ -55,16 +54,15 @@
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Height" />
       <RootProperty Name="Width" />
-      <RootProperty Name="Foreground" />
       <RootProperty Name="FontSize" />
       <RootProperty Name="RenderTransformOrigin" />
       <RootProperty Name="RequestedTheme" />
+      <RootProperty Name="Foreground" />
       <RootProperty Name="SelectionHighlightColor" />
       <RootProperty Name="FontFamily" />
       <RootEvent Name="SelectionChanged" />
       <RootEvent Name="Loaded" />
     </RootType>
-    <RootType FullName="Dali.Views.ConfigureMark" />
     <RootType FullName="Windows.UI.Xaml.Controls.ListView">
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Height" />
@@ -79,7 +77,7 @@
     </RootType>
     <RootType FullName="Dali.Views.OldNewMenu" />
     <RootType FullName="Dali.Views.MainPage" />
-    <RootType FullName="Dali.Views.MasterDetailPage" />
+    <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.ThemeResourceExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
       <RootProperty Name="Children" />
       <RootProperty Name="Orientation" />

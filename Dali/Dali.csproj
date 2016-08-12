@@ -100,9 +100,6 @@
     <Compile Include="Views\SetNewMark.xaml.cs">
       <DependentUpon>SetNewMark.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ConfigureMark.xaml.cs">
-      <DependentUpon>ConfigureMark.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\OldMarks.xaml.cs">
       <DependentUpon>OldMarks.xaml</DependentUpon>
     </Compile>
@@ -113,9 +110,6 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\MasterDetailPage.xaml.cs">
-      <DependentUpon>MasterDetailPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\webView.xaml.cs">
       <DependentUpon>webView.xaml</DependentUpon>
     </Compile>
@@ -150,10 +144,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ConfigureMark.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\OldMarks.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -165,10 +155,6 @@
     <Page Include="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\MasterDetailPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\webView.xaml">
       <SubType>Designer</SubType>
