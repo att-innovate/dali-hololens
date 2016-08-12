@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p id="markId"></p>
+<p label="markLabel"></p>
+<p type="markType"></p>
+<p content="markContent"></p>
+
+var id;
+function getRequest()
+   id = location.search;
+   document.getElementById("markId").innerHTML= id;
+   $(document).ready(function(){
+        $.get("https://10.250.3.24:8085/mark/" + id, function(data, status){
+            alert("Data: " + data + "\nStatus: " + status);
+        });
+   });
+}
+getRequest();
+</script>
+
+</body>
+</html>

@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Web.Http.Headers;
+using System.Text;
+using System.Net.Http.Headers;
+using System.Net.Http;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -87,11 +91,6 @@ namespace Dali.Views
                 case "":
                     break;
             }
-
-            // Create an AutoResetEvent to signal the timeout threshold in the
-            // timer callback has been reached.
-            // var autoEvent = new AutoResetEvent(false);
-
             var statusChecker = new StatusChecker();
             timer = new Timer(statusChecker.CheckStatus,
                                        null, 1000, 500);
@@ -132,7 +131,6 @@ namespace Dali.Views
                 invokeCount = 0;
             }
 
-
             // This method is called by the timer delegate.
             public async void CheckStatus(Object stateInfo)
             {
@@ -140,64 +138,46 @@ namespace Dali.Views
                     DateTime.Now.ToString("h:mm:ss.fff"),
                     (++invokeCount).ToString());
 
-
                 await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                 () =>
                 {
+
+                    GetRequest("http://10.250.3.24:8085", Globals.selectedMark.id);
                     WebView newView = new WebView();
                     newView.Refresh();
-                        // refresh();
-                        System.Diagnostics.Debug.WriteLine("refresh");
+                    System.Diagnostics.Debug.WriteLine("refresh");
                 });
-
-
-
-
-                /* if (invokeCount == maxCount)
-                 {
-
-                     // Reset the counter and signal the waiting thread.
-                     invokeCount = 0;
-                     autoEvent.Set();
-                 }*/
             }
-        }
 
-
-        /*  public bool Reload(object param)
-          {
-              System.Diagnostics.Debug.WriteLine("reloaded");
-
-              Type type = this.Frame.CurrentSourcePageType;
-              if (this.Frame.BackStack.Any())
-              {
-                  type = this.Frame.BackStack.Last().SourcePageType;
-                  param = this.Frame.BackStack.Last().Parameter;
-                  this.Frame.Refresh();
-              }
-              try { return this.Frame.Navigate(type, param); }
-              finally
-              {
-                  this.Frame.BackStack.Remove(this.Frame.BackStack.Last());
-              }
-          }*/
-
-        public async void refresh()
-        {
-
-            OldMarks newClass = new OldMarks();
-            newClass.GetRequest("http://10.250.3.24:8085");
-
-            var selectedMark = Globals.selectedMark;
-            var newMarks = Globals.marks;
-            for (int i = 0; i < newMarks.Count; i++)
+            public async void GetRequest(string url, string id)
             {
-                if (newMarks[i].label == selectedMark.label)
+                try
                 {
-                    selectedMark = newMarks[i];
+                    using (HttpClient client = new HttpClient())
+                    {
+                        client.BaseAddress = new Uri(url);
+                        client.DefaultRequestHeaders
+                                    .Accept
+                                     .Add(new MediaTypeWithQualityHeaderValue("application/json"));//ACCEPT header
+                        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "relativeAddress");
+
+                        using (var response = client.GetAsync("/mark/" + id).Result)
+                        {
+
+                            string responseString = response.Content.ReadAsStringAsync().Result;
+                            System.Diagnostics.Debug.WriteLine("GET SUCCESS:");
+                            System.Diagnostics.Debug.WriteLine(responseString);
+
+
+                        }
+                    }
+                }
+                catch (Exception exception)
+                {
+                    System.Diagnostics.Debug.WriteLine("CAUGHT EXCEPTION:");
+                    System.Diagnostics.Debug.WriteLine(exception);
                 }
             }
-
         }
 
         private static string UriToString(Uri uri)
@@ -205,52 +185,25 @@ namespace Dali.Views
             return (uri != null) ? uri.ToString() : "";
         }
 
-        /// <summary>
-        /// Handle the event that indicates that WebView is starting a navigation.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
         void WebViewControl_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
         {
             string url = UriToString(args.Uri);
         }
 
-        /// <summary>
-        /// Handle the event that indicates that the WebView content is not a web page.
-        /// For example, it may be a file download.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
         void WebViewControl_UnviewableContentIdentified(WebView sender, WebViewUnviewableContentIdentifiedEventArgs args)
         {
 
         }
 
-        /// <summary>
-        /// Handle the event that indicates that WebView has resolved the URI, and that it is loading HTML content.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
         void WebViewControl_ContentLoading(WebView sender, WebViewContentLoadingEventArgs args)
         {
 
         }
 
-        /// <summary>
-        /// Handle the event that indicates that the WebView content is fully loaded.
-        /// If you need to invoke script, it is best to wait for this event.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
         void WebViewControl_DOMContentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args)
         {
         }
 
-        /// <summary>
-        /// Event to indicate webview has completed the navigation, either with success or failure.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
         void WebViewControl_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
         {
 
