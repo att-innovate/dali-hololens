@@ -7,14 +7,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Margin="0,-3,0,3" Background="#FF00B9FF">
+    <Grid Margin="10,10,10.333,10" Background="#FF00B9FF">
         <Grid.RowDefinitions>
             <RowDefinition Height="493*"/>
             <RowDefinition Height="275*"/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="42,46,52,394.8" TextWrapping="Wrap" Text="Would you like to create a new mark or view a previously created mark?" VerticalAlignment="Center" RenderTransformOrigin="-0.829,-1.283" Height="52" Width="338" RequestedTheme="Light" Foreground="#FF000005" SelectionHighlightColor="Black" FontFamily="Segoe WP" SelectionChanged="textBlock_SelectionChanged"/>
-        <Button x:Name="newButton" Content="New" HorizontalAlignment="Center" Margin="117,129,142,298.8" VerticalAlignment="Center" Click="newButton_Click" Height="65" Width="173" Background="#FFEDF1F4"/>
-        <Button x:Name="oldButton" Content="Existing" HorizontalAlignment="Center" Margin="117,248,142,179.8" VerticalAlignment="Center" Click="oldButton_Click" Height="65" Width="173" Background="#FFF3F3F3" Foreground="Black"/>
+        <TextBlock x:Name="textlock" HorizontalAlignment="Center" Margin="180,30,158,213.333" TextWrapping="Wrap" Text="Would you like to create a new mark or view a previously created mark?" VerticalAlignment="Center" RenderTransformOrigin="-0.829,-1.283" Height="52" Width="495" RequestedTheme="Light" Foreground="#FF000005" SelectionHighlightColor="Black" FontFamily="Segoe WP" SelectionChanged="textBlock_SelectionChanged" FontSize="20" FontWeight="Bold"/>
+        <Button x:Name="newButton" Content="New" HorizontalAlignment="Center" Margin="322,110,338,120.333" VerticalAlignment="Center" Click="newButton_Click" Height="65" Width="173" Background="#FFEDF1F4"/>
+        <Button x:Name="oldButton" Content="Existing" HorizontalAlignment="Center" Margin="322,220,338,10.333" VerticalAlignment="Center" Click="oldButton_Click" Height="65" Width="173" Background="#FFF3F3F3" Foreground="Black"/>
 
     </Grid>
 </Page>

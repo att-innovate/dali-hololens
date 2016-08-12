@@ -6,9 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    
-    <Grid Margin="0,-3,0,3">
-        <TextBox x:Name="textBox" HorizontalAlignment="Center" Margin="37,66,139,670" TextWrapping="Wrap" Text="" VerticalAlignment="Center" RenderTransformOrigin="0.158,0.676" PlaceholderText="Label this Spot" TextChanged="textBox_TextChanged" Background="#FFFF2F2F" FontWeight="Bold" Width="256" Foreground="#FFF10303"/>
-        <Button x:Name="button" Content="Done" HorizontalAlignment="Center" Margin="320,66,56,670" VerticalAlignment="Center" Click="button_Click"/>
+
+    <Grid Margin="0,-3,0,3" Background="#FF00B9FF">
+        <TextBox x:Name="textBox" HorizontalAlignment="Center" Margin="80,163,153,242" TextWrapping="Wrap" Text="" VerticalAlignment="Center" RenderTransformOrigin="-3.075,-5.177" PlaceholderText="Label this Spot" TextChanged="textBox_TextChanged" Background="White" FontWeight="Bold" Width="620" Foreground="#FFF10303" Height="75" FontSize="25"/>
+        <Button x:Name="button" Content="Done" HorizontalAlignment="Center" Margin="720,163,43,242" VerticalAlignment="Center" RenderTransformOrigin="-0.393,-4.708" Click="button_Click" Height="75" Width="90" FontSize="20"/>
     </Grid>
 </Page>

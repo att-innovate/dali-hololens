@@ -7,9 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid>
-        <TextBlock x:ConnectionId='1' x:Name="textBlock" HorizontalAlignment="Center" Margin="34,42,28,681" TextWrapping="Wrap" Text="Select the old mark you wish to view here" VerticalAlignment="Center" Height="45" Width="370" FontSize="20"                                                                        />
-        <ListView x:ConnectionId='2' x:Name="listView" HorizontalAlignment="Center" Height="588" Margin="30,92,32,88" VerticalAlignment="Center" Width="370"                                             />
+    <Grid Background="#FF00B9FF">
+        <TextBlock x:ConnectionId='1' x:Name="textBlock" HorizontalAlignment="Center" Margin="241,35,242,400" TextWrapping="Wrap" Text="Select the old mark you wish to view here" VerticalAlignment="Center" Height="45" Width="370" FontSize="20"                                                                        />
+        <ListView x:ConnectionId='2' x:Name="listView" HorizontalAlignment="Center" Height="300" Margin="137,85,146,95" VerticalAlignment="Center" Width="570" RenderTransformOrigin="0.499,0.65"                                             />
 
     </Grid>
 </Page>

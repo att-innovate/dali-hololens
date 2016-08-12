@@ -56,7 +56,7 @@ namespace Dali.Views
                                  .Add(new MediaTypeWithQualityHeaderValue("application/json"));//ACCEPT header
                     HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "relativeAddress");
 
-                    using (var response = client.GetAsync("/mark/").Result)
+                    using (var response = client.GetAsync("/mark").Result)
                     {
 
                         string responseString = response.Content.ReadAsStringAsync().Result;
