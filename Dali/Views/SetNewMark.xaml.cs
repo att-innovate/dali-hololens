@@ -27,9 +27,10 @@ namespace Dali.Views
     /// </summary>
 
 
-    public class Mark
+    //MarkWithContent includes a "content" field because in order to post to the server, the request much include every field (id, label, type, and content)
+    public class MarkWithContent
     {
-        [JsonProperty(PropertyName = "id")]
+        [JsonProperty(PropertyName = "Id")]
         public string id { get; set; }
         [JsonProperty(PropertyName = "Label")]
         public string label { get; set; }
@@ -40,7 +41,7 @@ namespace Dali.Views
     }
 
         public sealed partial class SetNewMark : Page
-    {
+    {   
         public SetNewMark()
         {
             this.InitializeComponent();
@@ -55,13 +56,17 @@ namespace Dali.Views
                 {
                     client.BaseAddress = new Uri(url);
                 
-                    var mark = new Mark();
+                    var mark = new MarkWithContent();
                     mark.id = Globals.newId;
                     mark.label = newLabel;
                     mark.type = "";
                     mark.content = new List<string>();
 
-                    Globals.selectedMark = mark;
+                    var selectedMark = new Mark();
+                    selectedMark.id = Globals.newId;
+                    selectedMark.label = newLabel;
+                    selectedMark.type = "";
+                    Globals.selectedMark = selectedMark;
 
                     //serialize struct into a JSON String
                     var json = JsonConvert.SerializeObject(mark);

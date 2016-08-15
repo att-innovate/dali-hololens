@@ -28,6 +28,18 @@ namespace Dali.Views
     /// </summary>
     /// 
 
+    //Mark does not include a "content" field in order to maintain flexibility so that if a user choses to add new content types, the content
+    //structure here doesn't need altering because it's undefined until the HTML
+    public class Mark
+    {
+        [JsonProperty(PropertyName = "Id")]
+        public string id { get; set; }
+        [JsonProperty(PropertyName = "Label")]
+        public string label { get; set; }
+        [JsonProperty(PropertyName = "Type")]
+        public string type { get; set; }
+    }
+
     public static class Globals
     {
         // public static String getResponseString = "";
@@ -56,7 +68,7 @@ namespace Dali.Views
                                  .Add(new MediaTypeWithQualityHeaderValue("application/json"));//ACCEPT header
                     HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "relativeAddress");
 
-                    using (var response = client.GetAsync("/mark").Result)
+                    using (var response = client.GetAsync("/mark/").Result)
                     {
 
                         string responseString = response.Content.ReadAsStringAsync().Result;
@@ -150,11 +162,9 @@ namespace Dali.Views
                     currentMark.id = marks[i].id;
                     currentMark.label = marks[i].label;
                     currentMark.type = marks[i].type;
-                    currentMark.content = marks[i].content;
                 }
             }
             Globals.selectedMark = currentMark;
-            // this.Frame.Navigate(typeof(ConfigureMark), mark);
             this.Frame.Navigate(typeof(webView));
         }
     }
