@@ -1,0 +1,16 @@
+﻿<Page
+    x:Class="Dali.Views.Settings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Dali.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Margin="0,0,0.333,0" Background="#FF00B9FF" HorizontalAlignment="Center" VerticalAlignment="Center" Height="480" Width="853">
+        <TextBox x:Name="textBox" HorizontalAlignment="Center"  Margin="329,182,177,264" TextWrapping="Wrap" Text="" VerticalAlignment="Center" RenderTransformOrigin="0.158,0.676" PlaceholderText="http://www.server.com:8085" FontWeight="Bold" Width="347" Foreground="#FFF10303" Height="34"/>
+        <Button x:Name="done" Content="Done" HorizontalAlignment="Center" Margin="355,247,427,179" VerticalAlignment="Center" Click="DoneButton_Click" Height="54" Width="71"/>
+        <Button x:Name="cancel" Content="Cancel" HorizontalAlignment="Center" Margin="459,247,323,179" VerticalAlignment="Center" Click="CancelButton_Click" Height="54" Width="71"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="170,182,529,265" TextWrapping="Wrap" Text="Dali-Server URL: " VerticalAlignment="Center" Height="33" Width="154" FontSize="20" Foreground="White"/>
+    </Grid>
+</Page>

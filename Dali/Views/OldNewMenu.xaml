@@ -1,0 +1,21 @@
+﻿<Page
+    x:Class="Dali.Views.OldNewMenu"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Dali.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Margin="0,-3,0,3" Background="#FF00B9FF">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="493*"/>
+            <RowDefinition Height="275*"/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="175,46,123,210" TextWrapping="Wrap" Text="Would you like to create a new mark or view a previously created mark?" VerticalAlignment="Center" RenderTransformOrigin="-0.829,-1.283" Height="52" Width="555" RequestedTheme="Light" Foreground="#FF000005" SelectionHighlightColor="Black" FontFamily="Segoe WP"/>
+        <Button x:Name="newButton" Content="New" HorizontalAlignment="Center" Margin="328,110,352,133" VerticalAlignment="Center" Click="NewButton_Click" Height="65" Width="173" Background="#FFEDF1F4"/>
+        <Button x:Name="existingButton" Content="Existing" HorizontalAlignment="Center" Margin="328,195,352,48" VerticalAlignment="Center" Click="ExistingButton_Click" Height="65" Width="173" Background="#FFF3F3F3" Foreground="Black" RenderTransformOrigin="0.509,-0.205"/>
+        <Button x:Name="settingsButton" Content="Settings" HorizontalAlignment="Center" Margin="328,36,352,71" VerticalAlignment="Center" Click="SettingsButton_Click" Height="65" Width="173" Background="#FFF3F3F3" Foreground="Black" Grid.Row="1"/>
+
+    </Grid>
+</Page>

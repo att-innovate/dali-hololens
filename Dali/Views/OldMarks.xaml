@@ -1,0 +1,19 @@
+﻿<Page
+    x:Class="Dali.Views.OldMarks"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Dali.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Margin="0,0,0.333,0" Background="#FF00B9FF" HorizontalAlignment="Center" VerticalAlignment="Center" Height="480" Width="853">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="731*"/>
+            <ColumnDefinition Width="122*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="241,41,58.667,367" TextWrapping="Wrap" Text="Select the old mark you wish to view here" VerticalAlignment="Center" Height="72" Width="431" FontSize="20" Foreground="White"/>
+        <ListView x:Name="listView" HorizontalAlignment="Center" Height="318" Margin="241,82,119.667,80" VerticalAlignment="Center" Width="370" SelectionChanged="ListView_SelectionChanged" Foreground="White" IsSynchronizedWithCurrentItem="False" Background="White" />
+        <Button x:Name="button" Content="Cancel" HorizontalAlignment="Center" Margin="397,423,269.667,20" VerticalAlignment="Center" Height="37" Click="CancelButton_Click"/>
+    </Grid>
+</Page>

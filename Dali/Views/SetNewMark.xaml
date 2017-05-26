@@ -1,0 +1,15 @@
+﻿<Page
+    x:Class="Dali.Views.SetNewMark"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Dali.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Margin="0,0,0.333,0" Background="#FF00B9FF" HorizontalAlignment="Center" VerticalAlignment="Center" Height="480" Width="853">
+        <TextBox x:Name="textBox" HorizontalAlignment="Center"  Margin="126,188,380,257" TextWrapping="Wrap" Text="" VerticalAlignment="Center" RenderTransformOrigin="0.158,0.676" PlaceholderText="Label this Spot" FontWeight="Bold" Width="347" Foreground="#FFF10303" Height="35"/>
+        <Button x:Name="done" Content="Done" HorizontalAlignment="Center" Margin="496,184,286,242" VerticalAlignment="Center" Click="DoneButton_Click" Height="54" Width="71"/>
+        <Button x:Name="cancel" Content="Cancel" HorizontalAlignment="Center" Margin="589,184,193,242" VerticalAlignment="Center" Click="CancelButton_Click" Height="54" Width="71"/>
+    </Grid>
+</Page>
